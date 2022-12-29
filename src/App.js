@@ -9,11 +9,12 @@ import ClinicList from './components/pages/ClinicList';
 import DoctorList from './components/pages/DoctorList';
 import JobList from './components/pages/JobList'
 import Home from './components/pages/Home';
-import DoctorProfile from './components/pages/DoctorProfile';
 import SignUp from './components/pages/SignUp';
 import ClinicProfile from './components/pages/ClinicProfile';
 import About from './components/pages/About';
-
+import Loading from './components/elements/Loading'
+import Testupload from './components/pages/Testupload';
+const LazyDoctorProfile = React.lazy(() => import('./components/pages/DoctorProfile'))
 
 function App() {
 
@@ -30,8 +31,11 @@ function App() {
           <Route path='/doctors' element={<DoctorList />} />
           <Route path='/job-search' element={<JobList />} />
           <Route path='/about' element={<About />} />
-          <Route path='/doctor-profile' element={<DoctorProfile />} /> //only accessible to logged in user
-          <Route path='/clinic-profile' element={<ClinicProfile />} /> //only accessible to logged in user
+          <Route path="/doctor-profile" element={<React.Suspense fallback={<Loading />}>
+            <LazyDoctorProfile /></React.Suspense>}></Route>
+          <Route path='/clinic-profile' element={<ClinicProfile />} /> 
+
+          <Route path='/test' element={<Testupload />} />
         </Routes>
       </Context>
     </>

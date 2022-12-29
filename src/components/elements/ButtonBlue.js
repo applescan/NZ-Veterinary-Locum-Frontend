@@ -22,7 +22,7 @@ function buttonBlue(props) {
     `}
             </style>
 
-            <Button variant="blue" size="sml" onClick={props.onClick} style={props.style}>
+            <Button variant="blue" size="sml" onClick={props.onClick} style={props.style} type={props.type}>
                 {props.name}
             </Button>
         </>

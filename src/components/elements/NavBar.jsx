@@ -21,10 +21,12 @@ export default function NavBar() {
 
     const [showNav, setShowNav] = useState(false);
     const { user, setUser } = useContext(CustomContext)
+    const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
     const navigate = useNavigate()
 
     const handleLogout = () => {
         localStorage.clear(); //clear user data on sign-out 
+        setCurrentUserInfo({})
         navigate('/')
         window.location.reload()
     };

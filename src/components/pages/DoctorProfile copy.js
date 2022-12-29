@@ -40,20 +40,6 @@ export default function DoctorProfile() {
         setOpen(!isOpen);
     };
 
-    const deleteUser = async (event) => {
-        event.preventDefault();
-
-        try {
-            await axios.delete(`http://localhost:4000/doctors/delete/${user._id}`);
-            localStorage.clear(); //clear user data on sign-out 
-            setCurrentUserInfo({})
-            navigate('/')
-            window.location.reload()
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     //check if there's user data on page load
     useEffect(() => {
         //getting user's data from local storage
@@ -87,46 +73,28 @@ export default function DoctorProfile() {
 
         setError(null)
 
-        const data = new FormData(event.currentTarget);
-        console.log(data.get('first_name'))
-
-        const first_name = data.get('first_name') == null ? currentUserInfo.first_name : data.get('first_name');
-        const last_name = data.get('last_name') == null ? currentUserInfo.last_name : data.get('last_name');
-        const email = data.get('email') == null ? currentUserInfo.email : data.get('email');
-        const password = data.get('password') == null ? currentUserInfo.password : data.get('password');
-        const specialities = data.get('specialities') == null ? currentUserInfo.specialities : data.get('specialities');
-        const phone = data.get('phone') == null ? currentUserInfo.phone : data.get('phone');
-        const city = data.get('city') == null ? currentUserInfo.city : data.get('city');
-        const license = data.get('license') == null ? currentUserInfo.license : data.get('license');
-        const availability = data.get('availability') == null ? currentUserInfo.availability : data.get('availability');
-        const work_requirement = data.get('work_requirement') == null ? currentUserInfo.work_requirement : data.get('work_requirement');
-        const imageKey = FileRef.current.files[0] == null ? currentUserInfo.imageKey : FileRef.current.files[0];
-
-
+        const toSend = new FormData()
+        toSend.append('first_name', details.first_name)
+        toSend.append('last_name', details.last_name)
+        toSend.append('email', details.email)
+        toSend.append('password', details.password)
+        toSend.append('specialities', details.specialities)
+        toSend.append('phone', details.phone)
+        toSend.append('city', details.city)
+        toSend.append('license', details.license)
+        toSend.append('availability', details.availability)
+        toSend.append('work_requirement', details.work_requirement)
+        toSend.append('imageKey', FileRef.current.files[0])
         console.log("uploading")
-        try {
-            fetch(`http://localhost:4000/doctors/update/${user._id}`, {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    first_name: first_name,
-                    last_name: last_name,
-                    email: email,
-                    password: password,
-                    specialities: specialities,
-                    phone: phone,
-                    city: city,
-                    license: license,
-                    availability: availability,
-                    work_requirement: work_requirement,
-                    imageKey: imageKey
-                })
-            }).then(() => {
-                window.location.reload()
-            }).catch((error) => setError(error))
-        } catch (error) {
-            console.log(error.msg)
-        }
+        axios.post(`http://localhost:4000/doctors/update/${user._id}`, toSend, {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "multipart/form-data"
+            }
+        }).then(() => {
+            window.location.reload()
+        })
+            .catch((error) => setError(error))
     };
 
 
@@ -225,7 +193,7 @@ export default function DoctorProfile() {
                                 </MDBCardBody>
                             </MDBCard>
                             <ButtonBlue name="Edit Details" style={{ marginRight: 30 }} onClick={handleToggle}></ButtonBlue>
-                            <ButtonBlueOutlined name="Delete Profile" style={{ marginRight: 30 }} onClick={deleteUser}></ButtonBlueOutlined>
+                            <ButtonBlueOutlined name="Delete Profile" style={{ marginRight: 30 }} ></ButtonBlueOutlined>
 
                         </MDBCol>
                     </MDBRow>
@@ -266,25 +234,25 @@ export default function DoctorProfile() {
 
                                         <Grid item xs={12} sm={6}>
                                             <TextField
-                                                autoComplete="first_name"
-                                                name="first_name"
+                                                autoComplete="given-name"
+                                                name="firstName"
                                                 fullWidth
-                                                id="first_name"
+                                                id="firstName"
                                                 label="First Name"
                                                 autoFocus
                                                 defaultValue={currentUserInfo.first_name}
-                                            // onChange={e => setDetails({ ...details, first_name: e.target.value })}
+                                                onChange={e => setDetails({ ...details, first_name: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
                                             <TextField
                                                 fullWidth
-                                                id="last_name"
+                                                id="lastName"
                                                 label="Last Name"
-                                                name="last_name"
+                                                name="lastName"
                                                 autoComplete="family-name"
                                                 defaultValue={currentUserInfo.last_name}
-                                            // onChange={e => setDetails({ ...details, last_name: e.target.value })}
+                                                onChange={e => setDetails({ ...details, last_name: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -295,7 +263,7 @@ export default function DoctorProfile() {
                                                 name="email"
                                                 autoComplete="email"
                                                 defaultValue={currentUserInfo.email}
-                                            // onChange={e => setDetails({ ...details, email: e.target.value })}
+                                                onChange={e => setDetails({ ...details, email: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -307,7 +275,7 @@ export default function DoctorProfile() {
                                                 id="password"
                                                 autoComplete="new-password"
                                                 defaultValue={currentUserInfo.password}
-                                            //onChange={e => setDetails({ ...details, password: e.target.value })}
+                                                onChange={e => setDetails({ ...details, password: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -319,7 +287,7 @@ export default function DoctorProfile() {
                                                 id="phone"
                                                 autoComplete="new-phone"
                                                 defaultValue={currentUserInfo.phone}
-                                            //onChange={e => setDetails({ ...details, phone: e.target.value })}
+                                                onChange={e => setDetails({ ...details, phone: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
@@ -331,7 +299,7 @@ export default function DoctorProfile() {
                                                 id="city"
                                                 autoComplete="new-city"
                                                 defaultValue={currentUserInfo.city}
-                                            //onChange={e => setDetails({ ...details, city: e.target.value })}
+                                                onChange={e => setDetails({ ...details, city: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
@@ -343,7 +311,7 @@ export default function DoctorProfile() {
                                                 id="license"
                                                 autoComplete="new-license"
                                                 defaultValue={currentUserInfo.license}
-                                            //onChange={e => setDetails({ ...details, license: e.target.value })}
+                                                onChange={e => setDetails({ ...details, license: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -357,7 +325,7 @@ export default function DoctorProfile() {
                                                 multiline
                                                 rows={2}
                                                 defaultValue={currentUserInfo.specialities}
-                                            //onChange={e => setDetails({ ...details, specialities: e.target.value })}
+                                                onChange={e => setDetails({ ...details, specialities: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -371,7 +339,7 @@ export default function DoctorProfile() {
                                                 multiline
                                                 rows={2}
                                                 defaultValue={currentUserInfo.availability}
-                                            //onChange={e => setDetails({ ...details, availability: e.target.value })}
+                                                onChange={e => setDetails({ ...details, availability: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -386,7 +354,7 @@ export default function DoctorProfile() {
                                                 multiline
                                                 rows={2}
                                                 defaultValue={currentUserInfo.work_requirement}
-                                            //onChange={e => setDetails({ ...details, work_requirement: e.target.value })}
+                                                onChange={e => setDetails({ ...details, work_requirement: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>

@@ -40,20 +40,6 @@ export default function DoctorProfile() {
         setOpen(!isOpen);
     };
 
-    const deleteUser = async (event) => {
-        event.preventDefault();
-
-        try {
-            await axios.delete(`http://localhost:4000/doctors/delete/${user._id}`);
-            localStorage.clear(); //clear user data on sign-out 
-            setCurrentUserInfo({})
-            navigate('/')
-            window.location.reload()
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     //check if there's user data on page load
     useEffect(() => {
         //getting user's data from local storage
@@ -122,6 +108,7 @@ export default function DoctorProfile() {
                     imageKey: imageKey
                 })
             }).then(() => {
+                //console.log(imageKey)
                 window.location.reload()
             }).catch((error) => setError(error))
         } catch (error) {
@@ -225,7 +212,7 @@ export default function DoctorProfile() {
                                 </MDBCardBody>
                             </MDBCard>
                             <ButtonBlue name="Edit Details" style={{ marginRight: 30 }} onClick={handleToggle}></ButtonBlue>
-                            <ButtonBlueOutlined name="Delete Profile" style={{ marginRight: 30 }} onClick={deleteUser}></ButtonBlueOutlined>
+                            <ButtonBlueOutlined name="Delete Profile" style={{ marginRight: 30 }} ></ButtonBlueOutlined>
 
                         </MDBCol>
                     </MDBRow>

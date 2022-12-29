@@ -22,7 +22,7 @@ function buttonBlueOutlined(props) {
     `}
             </style>
 
-            <Button variant="blueOutlined" size="sml" onClick={props.onClick} style={props.style}>
+            <Button variant="blueOutlined" size="sml" onClick={props.onClick} style={props.style} type={props.type}>
                 {props.name}
             </Button>
         </>

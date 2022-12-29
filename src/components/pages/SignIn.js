@@ -23,6 +23,10 @@ const theme = createTheme();
 
 const SignIn = () => {
     const { user, setUser } = useContext(CustomContext)
+
+    //setting the cureent user's info. It will be used in the doctor's profile pages through context.
+    const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
+
     const [error, setError] = useState(null)
     const navigate = useNavigate()
 
@@ -42,15 +46,16 @@ const SignIn = () => {
 
         }).then(response => {
             setUser(response.data)
-            localStorage.setItem('user', JSON.stringify(response.data.currentUserInfo)) //how to sest the local storage data across all pages? 
-            console.log(response.data)
+            setCurrentUserInfo(response.data.currentUserInfo)
+            localStorage.setItem('user', JSON.stringify(response.data.currentUserInfo))
+            console.log(response.data.currentUserInfo)
         })
             .catch((error) => setError(error.response.data.msg))
     };
 
 
     // if there's a user navigate to the profile
-    if (user) {
+    if (user && currentUserInfo) {
         navigate("/doctor-profile")
     }
 
@@ -97,10 +102,7 @@ const SignIn = () => {
                             id="password"
                             autoComplete="current-password"
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
+
                         <Button
                             type="submit"
                             fullWidth
@@ -109,13 +111,7 @@ const SignIn = () => {
                         >
                             Sign In
                         </Button>
-                        <Grid container>
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
-                        </Grid>
+
                     </Box>
                 </Box>
             </Container>

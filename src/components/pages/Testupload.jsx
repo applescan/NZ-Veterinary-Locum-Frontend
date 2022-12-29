@@ -13,8 +13,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-// import { CustomContext } from '../../context/Context';
-// import { useContext } from 'react';
+import { CustomContext } from '../../context/Context';
+import { useContext } from 'react';
+import { useEffect } from 'react';
 
 
 const theme = createTheme();
@@ -22,15 +23,89 @@ const theme = createTheme();
 export default function SignUp() {
 
     //setting the cureent user's info. It will be used in the doctor's profile pages through context.
-   // const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
+    // const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
+    const { user, setUser } = useContext(CustomContext)
+    const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
+
 
     const [details, setDetails] = useState({
         first_name: '', last_name: '', email: '', password: '',
         specialities: '', phone: '', city: '', license: '', availability: '', work_requirement: ''
     })
 
+    const [validation, setValidation] = useState({
+        first_name: '', last_name: '', email: '', password: '',
+        specialities: '', phone: '', city: '', license: '', availability: '', work_requirement: ''
+    });
+
     const [error, setError] = useState(null)
     const navigate = useNavigate()
+
+    const checkValidation = () => {
+        let errors = validation;
+
+        const first_name = details.first_name == null ? 'poop' : details.first_name;
+
+        // //first Name validation
+        // if (!details.fName.trim()) {
+        //     errors.fName = "First name is required";
+        // } else {
+        //     errors.fName = "";
+        // }
+        // //last Name validation
+        // if (!details.lName.trim()) {
+        //     errors.lName = "Last name is required";
+        // } else {
+        //     errors.lName = "";
+        // }
+
+        // // email validation
+        // const emailCond =
+        //     "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/";
+        // if (!details.email.trim()) {
+        //     errors.email = "Email is required";
+        // } else if (!details.email.match(emailCond)) {
+        //     errors.email = "Please ingress a valid email address";
+        // } else {
+        //     errors.email = "";
+        // }
+
+        // //password validation
+        // const cond1 = "/^(?=.*[a-z]).{6,20}$/";
+        // const cond2 = "/^(?=.*[A-Z]).{6,20}$/";
+        // const cond3 = "/^(?=.*[0-9]).{6,20}$/";
+        // const password = details.password;
+        // if (!password) {
+        //     errors.password = "password is required";
+        // } else if (password.length < 6) {
+        //     errors.password = "Password must be longer than 6 characters";
+        // } else if (password.length >= 20) {
+        //     errors.password = "Password must shorter than 20 characters";
+        // } else if (!password.match(cond1)) {
+        //     errors.password = "Password must contain at least one lowercase";
+        // } else if (!password.match(cond2)) {
+        //     errors.password = "Password must contain at least one capital letter";
+        // } else if (!password.match(cond3)) {
+        //     errors.password = "Password must contain at least a number";
+        // } else {
+        //     errors.password = "";
+        // }
+
+
+        setValidation(errors);
+    };
+
+    useEffect(() => {
+        checkValidation();
+    }, [details]);
+
+    const onUpdateField = e => {
+        const nextFormState = {
+            ...details,
+            [e.target.name]: e.target.value,
+        };
+        setDetails(nextFormState);
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -50,7 +125,7 @@ export default function SignUp() {
         toSend.append('work_requirement', details.work_requirement)
         toSend.append('imageKey', FileRef.current.files[0])
         console.log("uploading")
-        axios.post('http://localhost:4000/doctors/add', toSend, {
+        axios.post(`http://localhost:4000/doctors/update/63abdc28195f544fd4bd053e`, toSend, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "multipart/form-data"
@@ -58,7 +133,8 @@ export default function SignUp() {
         }).then((res) => {
             //setCurrentUserInfo(res.data)
             console.log(res.data)
-            navigate("/sign-in")
+            alert(JSON.stringify(details, null, 2));
+            //navigate("/sign-in")
         })
             .catch((error) => setError(error))
     };
@@ -90,28 +166,32 @@ export default function SignUp() {
                         {error ? <h1>{error.toString()}</h1> : null}
 
                         <input ref={FileRef} type="file" />
+                        <br></br>
+                        <br></br>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
+                                    name="first_name"
                                     required
                                     fullWidth
-                                    id="firstName"
+                                    id="first_name"
                                     label="First Name"
                                     autoFocus
-                                    onChange={e => setDetails({ ...details, first_name: e.target.value })}
+                                    value={details.first_name}
+                                    onChange={onUpdateField}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     required
                                     fullWidth
-                                    id="lastName"
+                                    id="last_name"
                                     label="Last Name"
-                                    name="lastName"
+                                    name="last_name"
                                     autoComplete="family-name"
-                                    onChange={e => setDetails({ ...details, last_name: e.target.value })}
+                                    value={details.last_name}
+                                    onChange={onUpdateField}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -122,7 +202,8 @@ export default function SignUp() {
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
-                                    onChange={e => setDetails({ ...details, email: e.target.value })}
+                                    value={details.email}
+                                    onChange={onUpdateField}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -134,7 +215,8 @@ export default function SignUp() {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
-                                    onChange={e => setDetails({ ...details, password: e.target.value })}
+                                    value={details.password}
+                                    onChange={onUpdateField}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -145,7 +227,8 @@ export default function SignUp() {
                                     type="number"
                                     id="phone"
                                     autoComplete="new-phone"
-                                    onChange={e => setDetails({ ...details, phone: e.target.value })}
+                                    value={details.phone}
+                                    onChange={onUpdateField}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -157,7 +240,8 @@ export default function SignUp() {
                                     type="text"
                                     id="city"
                                     autoComplete="new-city"
-                                    onChange={e => setDetails({ ...details, city: e.target.value })}
+                                    value={details.city}
+                                    onChange={onUpdateField}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -169,7 +253,8 @@ export default function SignUp() {
                                     type="text"
                                     id="license"
                                     autoComplete="new-license"
-                                    onChange={e => setDetails({ ...details, license: e.target.value })}
+                                    value={details.license}
+                                    onChange={onUpdateField}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -183,7 +268,8 @@ export default function SignUp() {
                                     autoComplete="specialities"
                                     multiline
                                     rows={2}
-                                    onChange={e => setDetails({ ...details, specialities: e.target.value })}
+                                    value={details.specialities}
+                                    onChange={onUpdateField}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -197,7 +283,8 @@ export default function SignUp() {
                                     autoComplete="availability"
                                     multiline
                                     rows={2}
-                                    onChange={e => setDetails({ ...details, availability: e.target.value })}
+                                    value={details.availability}
+                                    onChange={onUpdateField}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -211,7 +298,8 @@ export default function SignUp() {
                                     placeholder='Please book 2 weeks in advance'
                                     multiline
                                     rows={2}
-                                    onChange={e => setDetails({ ...details, work_requirement: e.target.value })}
+                                    value={details.work_requirement}
+                                    onChange={onUpdateField}
                                 />
                             </Grid>
                         </Grid>
@@ -236,3 +324,72 @@ export default function SignUp() {
         </ThemeProvider>
     );
 }
+
+// import { useState } from "react";
+// import styles from "./LoginForm.module.css";
+
+// const LoginForm = props => {
+//     const [form, setForm] = useState({
+//         email: "",
+//         password: "",
+//         confirmPassword: "",
+//     });
+
+//     const onUpdateField = e => {
+//         const nextFormState = {
+//             ...form,
+//             [e.target.name]: e.target.value,
+//         };
+//         setForm(nextFormState);
+//     };
+
+//     const onSubmitForm = e => {
+//         e.preventDefault();
+//         alert(JSON.stringify(form, null, 2));
+//     };
+
+//     return (
+//         <form className={styles.form} onSubmit={onSubmitForm}>
+//             <div className={styles.formGroup}>
+//                 <label className={styles.formLabel}>Email</label>
+//                 <input
+//                     className={styles.formField}
+//                     type="text"
+//                     aria-label="Email field"
+//                     name="email"
+//                     value={form.email}
+//                     onChange={onUpdateField}
+//                 />
+//             </div>
+//             <div className={styles.formGroup}>
+//                 <label className={styles.formLabel}>Password</label>
+//                 <input
+//                     className={styles.formField}
+//                     type="password"
+//                     aria-label="Password field"
+//                     name="password"
+//                     value={form.password}
+//                     onChange={onUpdateField}
+//                 />
+//             </div>
+//             <div className={styles.formGroup}>
+//                 <label className={styles.formLabel}>Confirm Password</label>
+//                 <input
+//                     className={styles.formField}
+//                     type="password"
+//                     aria-label="Confirm password field"
+//                     name="confirmPassword"
+//                     value={form.confirmPassword}
+//                     onChange={onUpdateField}
+//                 />
+//             </div>
+//             <div className={styles.formActions}>
+//                 <button className={styles.formSubmitBtn} type="submit">
+//                     Login
+//                 </button>
+//             </div>
+//         </form>
+//     );
+// };
+
+// export default LoginForm;
