@@ -22,25 +22,31 @@ export default function NavBar() {
     const [showNav, setShowNav] = useState(false);
     const { user, setUser } = useContext(CustomContext)
     const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
+    const { userClinic, setUserClinic } = useContext(CustomContext)
+    const { currentUserInfoClinic, setCurrentUserInfoClinic } = useContext(CustomContext)
     const navigate = useNavigate()
 
     const handleLogout = () => {
         localStorage.clear(); //clear user data on sign-out 
         setCurrentUserInfo({})
+        setCurrentUserInfoClinic({})
         navigate('/')
         window.location.reload()
     };
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
+        const userClinic = JSON.parse(localStorage.getItem('userClinic'));
         if (user) {
             setUser(user);
+        } else if (userClinic) {
+            setUserClinic(userClinic)
         }
     }, []);
 
     console.log(user)
 
-    if (user) {
+    if (user || userClinic) {
         return <div className='nav-shadow'>
             <MDBNavbar sticky expand='lg' light style={{ backgroundColor: '#F3F9FF' }} >
                 <MDBContainer fluid >

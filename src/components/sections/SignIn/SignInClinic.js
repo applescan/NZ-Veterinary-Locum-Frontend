@@ -61,7 +61,7 @@ const SignIn = () => {
 
     // if there's a user navigate to the profile
     if (userClinic && currentUserInfoClinic) {
-        //navigate("/clinic-profile")
+        navigate("/clinic-profile")
     }
 
     // if there's no user, show the login form

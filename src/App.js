@@ -10,7 +10,6 @@ import DoctorList from './components/pages/DoctorList';
 import JobList from './components/pages/JobList'
 import Home from './components/pages/Home';
 import SignUp from './components/pages/SignUp';
-import ClinicProfile from './components/pages/ClinicProfile';
 import About from './components/pages/About';
 import Loading from './components/elements/Loading'
 import SignUpDoctor from './components/sections/Register/SignUpDoctor';
@@ -20,6 +19,7 @@ import SignUpClinic from './components/sections/Register/SignUpClinic'
 import JobDetails from './components/pages/JobDetails'
 import Footer from './components/elements/Footer'
 const LazyDoctorProfile = React.lazy(() => import('./components/pages/DoctorProfile'))
+const LazyClinicProfile = React.lazy(() => import('./components/pages/ClinicProfile'))
 
 function App() {
 
@@ -43,7 +43,8 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path="/doctor-profile" element={<React.Suspense fallback={<Loading />}>
             <LazyDoctorProfile /></React.Suspense>}></Route>
-          <Route path='/clinic-profile' element={<ClinicProfile />} />
+          <Route path="/clinic-profile" element={<React.Suspense fallback={<Loading />}>
+            <LazyClinicProfile /></React.Suspense>}></Route>
         </Routes>
         <Footer />
       </Context>
