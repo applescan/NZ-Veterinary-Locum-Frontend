@@ -1,20 +1,19 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { CustomContext } from '../../context/Context';
+import PageHeader from '../../elements/PageHeader';
+import DoctorRegistrationBanner from '../../../images/doctor-registration-banner.png'
+import Button from '@mui/material/Button';
+import { CustomContext } from '../../../context/Context';
 import { useContext } from 'react';
+import Alert from 'react-bootstrap/Alert';
 
 
 const theme = createTheme();
@@ -22,25 +21,26 @@ const theme = createTheme();
 export default function SignUp() {
 
     //setting the cureent user's info. It will be used in the doctor's profile pages through context.
-    // const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
-    const { user, setUser } = useContext(CustomContext)
     const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
-
 
     const [details, setDetails] = useState({
         first_name: '', last_name: '', email: '', password: '',
         specialities: '', phone: '', city: '', license: '', availability: '', work_requirement: ''
     })
 
-    const [error, setError] = useState(null)
+    const [error, setError] = useState('')
+    let myRef = {}
     const navigate = useNavigate()
 
-    const onUpdateField = e => {
-        const nextFormState = {
-            ...details,
-            [e.target.name]: e.target.value,
+    //sign up button will be disabled until all forms is filled
+    function SubmitButton() {
+        if (details.first_name && details.last_name && details.email && details.password
+            && details.specialities && details.phone && details.city && details.license
+            && details.availability && details.work_requirement) {
+            return <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => { myRef.current.reportValidity() }}>Sign Up</Button>
+        } else {
+            return <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => { myRef.current.reportValidity() }} disabled>Sign Up</Button>
         };
-        setDetails(nextFormState);
     };
 
     const handleSubmit = (event) => {
@@ -61,27 +61,31 @@ export default function SignUp() {
         toSend.append('work_requirement', details.work_requirement)
         toSend.append('imageKey', FileRef.current.files[0])
         console.log("uploading")
-        axios.post(`http://localhost:4000/doctors/update/63abdc28195f544fd4bd053e`, toSend, {
+        axios.post('http://localhost:4000/doctors/add', toSend, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "multipart/form-data"
             }
-        }).then((res) => {
-            //setCurrentUserInfo(res.data)
-            console.log(res.data)
-            alert(JSON.stringify(details, null, 2));
-            //navigate("/sign-in")
+        }).then(response => {
+            console.log(response.data)
+            setCurrentUserInfo(response.data.currentUserInfo)
+            setTimeout(function () { navigate("/sign-in"); }, 2000);
         })
-            .catch((error) => setError(error))
+            .catch((error) => setError(error.response.data.msg))
     };
+
+
 
     const FileRef = React.useRef()
 
 
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+        <div id="Doctor-registration">
+
+            <PageHeader maoriTitle="Hono mai ki ta maatau whatunga o nga taote!" englishTitle="Join our network of doctors 🐾" background={DoctorRegistrationBanner} />
+
+            <Container component="main" maxWidth="md" >
                 <CssBaseline />
                 <Box
                     sx={{
@@ -91,59 +95,58 @@ export default function SignUp() {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
 
-                        {error ? <h1>{error.toString()}</h1> : null}
+                        {error ? <Alert key='danger' variant='danger'> {error.toString()}</Alert> : null}
 
-                        <input ref={FileRef} type="file" />
-                        <br></br>
-                        <br></br>
+                        <Grid item xs={12}>
+                            <input ref={FileRef} type="file" inputRef={myRef} />
+                            <div className="small text-muted mt-2">Upload your profile picture. Max file size 5 MB</div>
+                            <br></br>
+                        </Grid>
+
+
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
+                                    inputRef={myRef}
                                     autoComplete="given-name"
-                                    name="first_name"
+                                    name="firstName"
                                     required
                                     fullWidth
-                                    id="first_name"
+                                    id="firstName"
                                     label="First Name"
                                     autoFocus
-                                    value={details.first_name}
-                                    onChange={onUpdateField}
+                                    onChange={e => setDetails({ ...details, first_name: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
+                                    inputRef={myRef}
                                     required
                                     fullWidth
-                                    id="last_name"
+                                    id="lastName"
                                     label="Last Name"
-                                    name="last_name"
+                                    name="lastName"
                                     autoComplete="family-name"
-                                    value={details.last_name}
-                                    onChange={onUpdateField}
+                                    onChange={e => setDetails({ ...details, last_name: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    inputRef={myRef}
                                     required
                                     fullWidth
                                     id="email"
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
-                                    value={details.email}
-                                    onChange={onUpdateField}
+                                    onChange={e => setDetails({ ...details, email: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    inputRef={myRef}
                                     required
                                     fullWidth
                                     name="password"
@@ -151,24 +154,25 @@ export default function SignUp() {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
-                                    value={details.password}
-                                    onChange={onUpdateField}
+                                    onChange={e => setDetails({ ...details, password: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    inputRef={myRef}
+                                    required
                                     fullWidth
                                     name="phone"
                                     label="Phone"
                                     type="number"
                                     id="phone"
                                     autoComplete="new-phone"
-                                    value={details.phone}
-                                    onChange={onUpdateField}
+                                    onChange={e => setDetails({ ...details, phone: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
+                                    inputRef={myRef}
                                     required
                                     fullWidth
                                     name="city"
@@ -176,12 +180,12 @@ export default function SignUp() {
                                     type="text"
                                     id="city"
                                     autoComplete="new-city"
-                                    value={details.city}
-                                    onChange={onUpdateField}
+                                    onChange={e => setDetails({ ...details, city: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
+                                    inputRef={myRef}
                                     required
                                     fullWidth
                                     name="license"
@@ -189,12 +193,12 @@ export default function SignUp() {
                                     type="text"
                                     id="license"
                                     autoComplete="new-license"
-                                    value={details.license}
-                                    onChange={onUpdateField}
+                                    onChange={e => setDetails({ ...details, license: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    inputRef={myRef}
                                     required
                                     fullWidth
                                     name="specialities"
@@ -204,12 +208,12 @@ export default function SignUp() {
                                     autoComplete="specialities"
                                     multiline
                                     rows={2}
-                                    value={details.specialities}
-                                    onChange={onUpdateField}
+                                    onChange={e => setDetails({ ...details, specialities: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    inputRef={myRef}
                                     required
                                     fullWidth
                                     name="availability"
@@ -219,12 +223,13 @@ export default function SignUp() {
                                     autoComplete="availability"
                                     multiline
                                     rows={2}
-                                    value={details.availability}
-                                    onChange={onUpdateField}
+                                    onChange={e => setDetails({ ...details, availability: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    inputRef={myRef}
+                                    required
                                     fullWidth
                                     name="work_requirement"
                                     label="Work Requirement"
@@ -234,30 +239,24 @@ export default function SignUp() {
                                     placeholder='Please book 2 weeks in advance'
                                     multiline
                                     rows={2}
-                                    value={details.work_requirement}
-                                    onChange={onUpdateField}
+                                    onChange={e => setDetails({ ...details, work_requirement: e.target.value })}
                                 />
+
+                                <SubmitButton />
+                                <br></br>
+                                <br></br>
+                                <br></br>
+
                             </Grid>
                         </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Sign Up
-                        </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
-                        </Grid>
+
                     </Box>
                 </Box>
             </Container>
-        </ThemeProvider>
+        </div>
     );
 }
+
+
+
 

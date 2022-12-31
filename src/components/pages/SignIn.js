@@ -1,121 +1,110 @@
-import React, { useState, useContext } from "react";
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios';
-import { CustomContext } from '../../context/Context';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import ClinicLogin from '../../images/clinic-login.png'
+import DoctorLogin from '../../images/doctor-login.png'
+import { useNavigate } from 'react-router-dom'
 
+export default function About() {
 
-
-const theme = createTheme();
-
-
-const SignIn = () => {
-    const { user, setUser } = useContext(CustomContext)
-
-    //setting the cureent user's info. It will be used in the doctor's profile pages through context.
-    const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
-
-    const [error, setError] = useState(null)
     const navigate = useNavigate()
 
-    const handleSubmit = async event => {
-
-        event.preventDefault();
-
-        setError(null)
-
-        const user = new FormData(event.currentTarget);
-
-        axios.post('http://localhost:4000/doctors/login', user, {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "multipart/form-data"
-            }
-
-        }).then(response => {
-            setUser(response.data)
-            setCurrentUserInfo(response.data.currentUserInfo)
-            localStorage.setItem('user', JSON.stringify(response.data.currentUserInfo))
-            console.log(response.data.currentUserInfo)
-        })
-            .catch((error) => setError(error.response.data.msg))
-    };
-
-
-    // if there's a user navigate to the profile
-    if (user && currentUserInfo) {
-        navigate("/doctor-profile")
-    }
-
-    // if there's no user, show the login form
     return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <>
+            <Wrapper id="Doctor-login">
+                <Title>
+                    <br></br>
+                    <h1>Sign in to NZ Veterinary Locum Network</h1>
+                </Title>
 
-                        {error ? <h1>{error.toString()}</h1> : null}
+                <Links>
+                    <LeftSide>
+                        <div className="img-link">
+                            <img src={DoctorLogin} className='img-fluid rounded' alt='sign-in as a doctor' onClick={() => { navigate(`/sign-in-doctor`) }} />
+                            <br></br>
+                            <br></br>
+                            <h6>Sign in as vet locum</h6>
+                        </div>
+                    </LeftSide>
 
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
 
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Sign In
-                        </Button>
+                    <RightSide>
+                        <div className="img-link">
+                            <img src={ClinicLogin} className='img-fluid rounded' alt='sign-in as a clinic' onClick={() => { navigate(`/sign-in-clinic`) }} />
+                            <br></br>
+                            <br></br>
+                            <h6>Sign in as clinic</h6>
+                        </div>
+                    </RightSide>
+                </Links>
+            </Wrapper>
 
-                    </Box>
-                </Box>
-            </Container>
-        </ThemeProvider>
+        </>
     );
 }
-export default SignIn;
+
+
+const Title = styled.section`
+  width: 100%;
+  display: flex;
+  padding-top: 8%;
+  padding-bottom: 2%;
+  padding-left: 10%;
+  padding-right: 10%;
+  height: 100%;
+  color: #5BA4EE;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
+`;
+
+const Wrapper = styled.section`
+  width: 100%;
+  display: block;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 5%;
+  height: 100%;
+  color:#5BA4EE;
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
+`;
+
+const Links = styled.section`
+  width: 100%;
+  display: flex;
+  padding: 0 10%;
+  height: 100%;
+  color: #5BA4EE;
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
+`;
+
+const LeftSide = styled.div`
+width: 50%;
+height: 100%;
+text-align: center;
+padding: 5%;
+
+@media (max-width: 960px) {
+  width: 100%;
+  padding: 0 50px;
+  text-align: center;
+}
+`;
+const RightSide = styled.div`
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  padding: 5%;
+
+  @media (max-width: 960px) {
+    width: 100%;
+    padding: 0 50px;
+    text-align: center;
+  }
+`;

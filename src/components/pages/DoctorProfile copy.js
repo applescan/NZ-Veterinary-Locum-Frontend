@@ -192,8 +192,8 @@ export default function DoctorProfile() {
                                     </MDBRow>
                                 </MDBCardBody>
                             </MDBCard>
-                            <ButtonBlue name="Edit Details" style={{ marginRight: 30 }} onClick={handleToggle}></ButtonBlue>
-                            <ButtonBlueOutlined name="Delete Profile" style={{ marginRight: 30 }} ></ButtonBlueOutlined>
+                            <ButtonBlue name="Edit Details" style={{ marginRight: 30 }} onClick={handleToggle} size='sml'></ButtonBlue>
+                            <ButtonBlueOutlined name="Delete Profile" style={{ marginRight: 30 }} size='sml'></ButtonBlueOutlined>
 
                         </MDBCol>
                     </MDBRow>
@@ -358,7 +358,7 @@ export default function DoctorProfile() {
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <ButtonBlue name="Save Changes" type="submit" style={{ marginBottom: 50 }}></ButtonBlue>
+                                            <ButtonBlue name="Save Changes" type="submit" style={{ marginBottom: 50 }} size='sml'></ButtonBlue>
                                         </Grid>
                                     </Grid>
                                 </Box>

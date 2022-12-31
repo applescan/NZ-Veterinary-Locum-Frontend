@@ -6,40 +6,40 @@ import { useNavigate } from 'react-router-dom'
 
 export default function About() {
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    return (
-        <>
-            <Wrapper>
-                <Title>
-                    <br></br>
-                    <h3>Register and join NZ Veterinary Locum Network</h3>
-                </Title>
+  return (
+    <>
+      <Wrapper>
+        <Title>
+          <br></br>
+          <h3>Register and join NZ Veterinary Locum Network</h3>
+        </Title>
 
-                <Links>
-                    <LeftSide>
-                        <div className="img-link">
-                            <img src={Doctor} className='img-fluid rounded' alt='sign-up as a doctor' onClick={() => { navigate(`/sign-up`) }} />
-                            <br></br>
-                            <br></br>
-                            <h6>Join as a vet locum</h6>
-                        </div>
-                    </LeftSide>
+        <Links>
+          <LeftSide>
+            <div className="img-link">
+              <img src={Doctor} className='img-fluid rounded' alt='sign-up as a doctor' onClick={() => { navigate(`/sign-up-doctor`) }} />
+              <br></br>
+              <br></br>
+              <h6>Join as a vet locum</h6>
+            </div>
+          </LeftSide>
 
 
-                    <RightSide>
-                        <div className="img-link">
-                            <img src={Clinic} className='img-fluid rounded' alt='sign-up as a clinic' />
-                            <br></br>
-                            <br></br>
-                            <h6>Join as a clinic</h6>
-                        </div>
-                    </RightSide>
-                </Links>
-            </Wrapper>
+          <RightSide>
+            <div className="img-link">
+              <img src={Clinic} className='img-fluid rounded' alt='sign-up as a clinic' onClick={() => { navigate(`/sign-up-clinic`) }} />
+              <br></br>
+              <br></br>
+              <h6>Join as a clinic</h6>
+            </div>
+          </RightSide>
+        </Links>
+      </Wrapper>
 
-        </>
-    );
+    </>
+  );
 }
 
 

@@ -13,7 +13,12 @@ import SignUp from './components/pages/SignUp';
 import ClinicProfile from './components/pages/ClinicProfile';
 import About from './components/pages/About';
 import Loading from './components/elements/Loading'
-import Testupload from './components/pages/Testupload';
+import SignUpDoctor from './components/sections/Register/SignUpDoctor';
+import SignInDoctor from './components/sections/SignIn/SignInDoctor'
+import SignInClinic from './components/sections/SignIn/SignInClinic'
+import SignUpClinic from './components/sections/Register/SignUpClinic'
+import JobDetails from './components/pages/JobDetails'
+import Footer from './components/elements/Footer'
 const LazyDoctorProfile = React.lazy(() => import('./components/pages/DoctorProfile'))
 
 function App() {
@@ -26,17 +31,21 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/sign-in' element={<SignIn />} />
+          <Route path='/sign-in-doctor' element={<SignInDoctor />} />
+          <Route path='/sign-in-clinic' element={<SignInClinic />} />
           <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/sign-up-doctor' element={<SignUpDoctor />} />
+          <Route path='/sign-up-clinic' element={<SignUpClinic />} />
           <Route path='/clinics' element={<ClinicList />} />
           <Route path='/doctors' element={<DoctorList />} />
           <Route path='/job-search' element={<JobList />} />
+          <Route path="/job-search/:id" element={<JobDetails />} />
           <Route path='/about' element={<About />} />
           <Route path="/doctor-profile" element={<React.Suspense fallback={<Loading />}>
             <LazyDoctorProfile /></React.Suspense>}></Route>
-          <Route path='/clinic-profile' element={<ClinicProfile />} /> 
-
-          <Route path='/test' element={<Testupload />} />
+          <Route path='/clinic-profile' element={<ClinicProfile />} />
         </Routes>
+        <Footer />
       </Context>
     </>
   );

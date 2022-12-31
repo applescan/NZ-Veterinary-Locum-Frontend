@@ -22,6 +22,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import axios from 'axios';
+import UserModal from "../elements/Modal";
 
 
 
@@ -29,18 +30,28 @@ const theme = createTheme();
 
 export default function DoctorProfile() {
 
+    const FileRef = React.useRef()
     const navigate = useNavigate()
+
+    //use state for getting user info and user from local storage
     const { user, setUser } = useContext(CustomContext)
     const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
-    const [isOpen, setOpen] = React.useState(false);
-    const FileRef = React.useRef()
 
+    //usestate for edit toggle button
+    const [isOpen, setOpen] = React.useState(false);
     //when edit button is clicked, the update form will appear
     const handleToggle = () => {
         setOpen(!isOpen);
     };
 
-    const deleteUser = async (event) => {
+    //usestate for modal
+    const [show, setShow] = useState(false);
+    //closing and opening modal functions
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    //when modal delete button is clicked, it will delete the user profile data 
+    const handleChanges = async (event) => {
         event.preventDefault();
 
         try {
@@ -224,8 +235,14 @@ export default function DoctorProfile() {
                                     </MDBRow>
                                 </MDBCardBody>
                             </MDBCard>
-                            <ButtonBlue name="Edit Details" style={{ marginRight: 30 }} onClick={handleToggle}></ButtonBlue>
-                            <ButtonBlueOutlined name="Delete Profile" style={{ marginRight: 30 }} onClick={deleteUser}></ButtonBlueOutlined>
+                            <ButtonBlue name="Edit Details" style={{ marginRight: 30 }} onClick={handleToggle} size='sml'></ButtonBlue>
+                            <ButtonBlueOutlined name="Delete Profile" style={{ marginRight: 30 }} onClick={() => handleShow()} size='sml'></ButtonBlueOutlined>
+
+
+                            {/* modal for user deletion*/}
+                            <UserModal show={show} handleClose={handleClose} handleShow={handleShow} handleChanges={handleChanges} nameClose='Cancel' nameOpen='Delete Profile'
+                                title='We are sad to see you go! 😔' text='Are you sure you want to delete your profile? You can not undo this action' />
+
 
                         </MDBCol>
                     </MDBRow>
@@ -390,7 +407,7 @@ export default function DoctorProfile() {
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <ButtonBlue name="Save Changes" type="submit" style={{ marginBottom: 50 }}></ButtonBlue>
+                                            <ButtonBlue name="Save Changes" type="submit" style={{ marginBottom: 50 }} size='sml'></ButtonBlue>
                                         </Grid>
                                     </Grid>
                                 </Box>

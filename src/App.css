@@ -167,3 +167,33 @@ video {
     height: 15px;
   }
 }
+
+/* registration page */
+#Doctor-registration {
+  background-image: url('../src/images/doctor-registration.png');
+  background-size: cover;
+}
+
+/* login page */
+#Doctor-login {
+  background-image: url('../src/images/login-background.png');
+  background-size: cover;
+}
+
+/* cards */
+#cards {
+  margin: 5%;
+}
+
+.card-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#card-body{
+  width: 50%;
+}
+
+#card-page{
+  margin: 10%;
+}

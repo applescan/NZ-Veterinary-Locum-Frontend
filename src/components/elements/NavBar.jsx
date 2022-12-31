@@ -96,7 +96,7 @@ export default function NavBar() {
                             </MDBNavbarItem>
                         </MDBNavbarNav>
                         <div className='nav-button'>
-                            <ButtonBlue onClick={handleLogout} name="Logout" style={{ marginRight: 30 }} ></ButtonBlue>
+                            <ButtonBlue onClick={handleLogout} name="Logout" style={{ marginRight: 30 }} size='sml'></ButtonBlue>
 
                         </div>
                     </MDBCollapse>
@@ -156,8 +156,8 @@ export default function NavBar() {
                             </MDBNavbarItem>
                         </MDBNavbarNav>
                         <div className='nav-button'>
-                            <ButtonBlueOutlined onClick={() => { navigate(`/sign-in`) }} name="Login" style={{ marginRight: 30 }} ></ButtonBlueOutlined>
-                            <ButtonBlue onClick={() => { navigate(`/sign-up`) }} name="Register" style={{ marginRight: 30 }}></ButtonBlue>
+                            <ButtonBlueOutlined onClick={() => { navigate(`/sign-in`) }} name="Login" style={{ marginRight: 30 }} size='sml' ></ButtonBlueOutlined>
+                            <ButtonBlue onClick={() => { navigate(`/sign-up`) }} name="Register" style={{ marginRight: 30 }} size='sml'></ButtonBlue>
                         </div>
                     </MDBCollapse>
                 </MDBContainer>

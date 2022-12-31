@@ -7,10 +7,13 @@ const Context = ({ children }) => {
     const [user, setUser] = useState() //context for current signed in users data
     const [currentUserInfo, setCurrentUserInfo] = useState('')
 
-    const [currentUserInfoClinic, setCurrentUserInfoClinic] = useState(); //context for current signed in users data
+    const [userClinic, setUserClinic] = useState() //context for current signed in users data
+    const [currentUserInfoClinic, setCurrentUserInfoClinic] = useState(''); //context for current signed in users data
 
     return <CustomContext.Provider value={{
-        user, setUser, currentUserInfo, setCurrentUserInfo, currentUserInfoClinic, setCurrentUserInfoClinic
+        user, setUser, currentUserInfo, setCurrentUserInfo,
+        userClinic, setUserClinic,
+        currentUserInfoClinic, setCurrentUserInfoClinic
     }}> {children}</CustomContext.Provider>
 
 }
