@@ -44,9 +44,7 @@ export default function NavBar() {
         }
     }, []);
 
-    console.log(user)
-
-    if (user || userClinic) {
+    if (user) {
         return <div className='nav-shadow'>
             <MDBNavbar sticky expand='lg' light style={{ backgroundColor: '#F3F9FF' }} >
                 <MDBContainer fluid >
@@ -97,6 +95,72 @@ export default function NavBar() {
                             </MDBNavbarItem>
                             <MDBNavbarItem>
                                 <MDBNavbarLink href='/doctor-profile'>
+                                    Your Profile
+                                </MDBNavbarLink>
+                            </MDBNavbarItem>
+                        </MDBNavbarNav>
+                        <div className='nav-button'>
+                            <ButtonBlue onClick={handleLogout} name="Logout" style={{ marginRight: 30 }} size='sml'></ButtonBlue>
+
+                        </div>
+                    </MDBCollapse>
+                </MDBContainer>
+            </MDBNavbar>
+        </div>
+    }
+
+    // if user is clinic then snow this nav bar menu
+    if (userClinic) {
+        return <div className='nav-shadow'>
+            <MDBNavbar sticky expand='lg' light style={{ backgroundColor: '#F3F9FF' }} >
+                <MDBContainer fluid >
+                    <MDBNavbarBrand href='/'>
+                        <img
+                            src={Logo}
+                            height='70'
+                            alt=''
+                            loading='lazy'
+                        />
+                    </MDBNavbarBrand>
+
+                    <MDBNavbarToggler
+                        type='button'
+                        aria-expanded='false'
+                        aria-label='Toggle navigation'
+                        onClick={() => setShowNav(!showNav)}
+                    >
+                        <img
+                            src={Toggle}
+                            height='40'
+                            alt='toggle icon'
+                            loading='lazy'
+                        />
+                    </MDBNavbarToggler>
+
+                    <MDBCollapse navbar show={showNav}>
+                        <MDBNavbarNav style={{ margin: 20 }}>
+                            <MDBNavbarItem>
+                                <MDBNavbarLink href='/job-search' >
+                                    Job Search
+                                </MDBNavbarLink>
+                            </MDBNavbarItem>
+                            <MDBNavbarItem>
+                                <MDBNavbarLink href='/doctors' >
+                                    Doctors
+                                </MDBNavbarLink>
+                            </MDBNavbarItem>
+                            <MDBNavbarItem>
+                                <MDBNavbarLink href='/clinics' >
+                                    Clinics
+                                </MDBNavbarLink>
+                            </MDBNavbarItem>
+                            <MDBNavbarItem>
+                                <MDBNavbarLink href='/about' >
+                                    About Us
+                                </MDBNavbarLink>
+                            </MDBNavbarItem>
+                            <MDBNavbarItem>
+                                <MDBNavbarLink href='/clinic-profile'>
                                     Your Profile
                                 </MDBNavbarLink>
                             </MDBNavbarItem>

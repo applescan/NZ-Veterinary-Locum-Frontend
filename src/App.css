@@ -38,6 +38,7 @@ body {
   z-index: 10;
 }
 
+
 /* home page banner css */
 
 .img-link {
@@ -103,6 +104,7 @@ video {
 #Home-about {
   background-image: url('../src/images/banner.png');
   background-size: cover;
+  height: 100%;
 }
 
 
@@ -178,6 +180,8 @@ video {
 #Doctor-login {
   background-image: url('../src/images/login-background.png');
   background-size: cover;
+  height: 100%;
+  min-height: 100vh;
 }
 
 /* cards */
@@ -190,11 +194,11 @@ video {
   flex-wrap: wrap;
 }
 
-#card-body{
+#card-body {
   width: 50%;
 }
 
-#card-page{
+#card-page {
   margin: 10%;
   height: 70vh;
 }

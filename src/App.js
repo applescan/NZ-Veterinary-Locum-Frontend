@@ -18,8 +18,10 @@ import SignInClinic from './components/sections/SignIn/SignInClinic'
 import SignUpClinic from './components/sections/Register/SignUpClinic'
 import JobDetails from './components/pages/JobDetails'
 import Footer from './components/elements/Footer'
+import AddJobCards from './components/sections/Cards/AddJobCards'
 const LazyDoctorProfile = React.lazy(() => import('./components/pages/DoctorProfile'))
 const LazyClinicProfile = React.lazy(() => import('./components/pages/ClinicProfile'))
+
 
 function App() {
 
@@ -41,10 +43,13 @@ function App() {
           <Route path='/job-search' element={<JobList />} />
           <Route path="/job-search/:id" element={<JobDetails />} />
           <Route path='/about' element={<About />} />
+          <Route path='/cards' element={<AddJobCards />} />
+          
           <Route path="/doctor-profile" element={<React.Suspense fallback={<Loading />}>
             <LazyDoctorProfile /></React.Suspense>}></Route>
           <Route path="/clinic-profile" element={<React.Suspense fallback={<Loading />}>
             <LazyClinicProfile /></React.Suspense>}></Route>
+
         </Routes>
         <Footer />
       </Context>

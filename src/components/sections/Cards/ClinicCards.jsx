@@ -52,7 +52,7 @@ export default function ClinicList() {
         axios
             .get('http://localhost:4000/clinics/search/city/north')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setNorthland(res.data)
             })
             .catch(err => {
@@ -65,7 +65,7 @@ export default function ClinicList() {
         axios
             .get('http://localhost:4000/clinics/search/city/auck')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setAuckland(res.data)
             })
             .catch(err => {
@@ -78,7 +78,7 @@ export default function ClinicList() {
         axios
             .get('http://localhost:4000/clinics/search/city/well')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setWellington(res.data)
             })
             .catch(err => {
@@ -91,7 +91,7 @@ export default function ClinicList() {
         axios
             .get('http://localhost:4000/clinics/search/city/dun')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setDunedin(res.data)
             })
             .catch(err => {
@@ -104,7 +104,7 @@ export default function ClinicList() {
         axios
             .get('http://localhost:4000/clinics/search/city/chr')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setChristchurch(res.data)
             })
             .catch(err => {
@@ -117,7 +117,7 @@ export default function ClinicList() {
         axios
             .get('http://localhost:4000/clinics/search/city/queen')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setQueenstown(res.data)
             })
             .catch(err => {
@@ -179,12 +179,12 @@ export default function ClinicList() {
                         {posts.map(post =>
                             <Col>
                                 <Card style={{ width: 'auto' }}>
-                                    <Card.Img variant="top" src={`http://localhost:4000/images/${post.imageKey}`} />
+                                    <Card.Img variant="top" src={`http://localhost:4000/images/${post.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                     <br></br>
                                     <div id='cards'>
                                         <Card.Title>{post.business_name} </Card.Title>
                                         <Card.Text>
-                                            {post.city}
+                                            {post.address}, {post.city}
                                         </Card.Text>
                                     </div>
                                     <ListGroup className="list-group-flush">
@@ -214,12 +214,12 @@ export default function ClinicList() {
                             {northland.map(north =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${north.imageKey}`} />
+                                        <Card.Img variant="top" src={`http://localhost:4000/images/${north.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{north.business_name} </Card.Title>
                                             <Card.Text>
-                                                {north.city}
+                                                {north.address}, {north.city}
                                             </Card.Text>
                                         </div>
                                         <ListGroup className="list-group-flush">
@@ -251,12 +251,12 @@ export default function ClinicList() {
                             {auckland.map(auck =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${auck.imageKey}`} />
+                                        <Card.Img variant="top" src={`http://localhost:4000/images/${auck.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{auck.business_name} </Card.Title>
                                             <Card.Text>
-                                                {auck.city}
+                                                {auck.address}, {auck.city}
                                             </Card.Text>
                                         </div>
                                         <ListGroup className="list-group-flush">
@@ -288,12 +288,12 @@ export default function ClinicList() {
                             {wellington.map(wlg =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${wlg.imageKey}`} />
+                                        <Card.Img variant="top" src={`http://localhost:4000/images/${wlg.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{wlg.business_name} </Card.Title>
                                             <Card.Text>
-                                                {wlg.city}
+                                                {wlg.address}, {wlg.city}
                                             </Card.Text>
                                         </div>
                                         <ListGroup className="list-group-flush">
@@ -324,12 +324,12 @@ export default function ClinicList() {
                             {dunedin.map(dune =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${dune.imageKey}`} />
+                                        <Card.Img variant="top" src={`http://localhost:4000/images/${dune.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{dune.business_name} </Card.Title>
                                             <Card.Text>
-                                                {dune.city}
+                                                {dune.address}, {dune.city}
                                             </Card.Text>
                                         </div>
                                         <ListGroup className="list-group-flush">
@@ -361,12 +361,12 @@ export default function ClinicList() {
                             {christchurch.map(chch =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${chch.imageKey}`} />
+                                        <Card.Img variant="top" src={`http://localhost:4000/images/${chch.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{chch.business_name} </Card.Title>
                                             <Card.Text>
-                                                {chch.city}
+                                                {chch.address}, {chch.city}
                                             </Card.Text>
                                         </div>
                                         <ListGroup className="list-group-flush">
@@ -398,12 +398,12 @@ export default function ClinicList() {
                             {queenstown.map(queens =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${queens.imageKey}`} />
+                                        <Card.Img variant="top" src={`http://localhost:4000/images/${queens.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{queens.business_name} </Card.Title>
                                             <Card.Text>
-                                                {queens.city}
+                                                {queens.address}, {queens.city}
                                             </Card.Text>
                                         </div>
                                         <ListGroup className="list-group-flush">

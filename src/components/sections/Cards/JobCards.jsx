@@ -52,11 +52,11 @@ export default function JobList() {
         axios
             .get('http://localhost:4000/jobs/search/north')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setNorthland(res.data)
             })
             .catch(err => {
-                console.log(err)
+                //console.log(err)
                 setError('Error retrieving data')
             })
     }, []) //only do get request on load
@@ -65,7 +65,7 @@ export default function JobList() {
         axios
             .get('http://localhost:4000/jobs/search/auck')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setAuckland(res.data)
             })
             .catch(err => {
@@ -78,7 +78,7 @@ export default function JobList() {
         axios
             .get('http://localhost:4000/jobs/search/well')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setWellington(res.data)
             })
             .catch(err => {
@@ -91,7 +91,7 @@ export default function JobList() {
         axios
             .get('http://localhost:4000/jobs/search/dun')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setDunedin(res.data)
             })
             .catch(err => {
@@ -104,7 +104,7 @@ export default function JobList() {
         axios
             .get('http://localhost:4000/jobs/search/chri')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setChristchurch(res.data)
             })
             .catch(err => {
@@ -117,7 +117,7 @@ export default function JobList() {
         axios
             .get('http://localhost:4000/jobs/search/queen')
             .then(res => {
-                console.log(res)
+                //console.log(res)
                 setQueenstown(res.data)
             })
             .catch(err => {
@@ -184,7 +184,7 @@ export default function JobList() {
                                         <div className="card-body" id='card-body'>
                                             <h4 className="card-title">{post.job_title}</h4>
                                             <p className="card-text">
-                                                {post.location}
+                                                {post.location}, New Zealand
                                             </p>
                                             <p>
                                                 <b>Email: </b>{post.email}
@@ -199,6 +199,9 @@ export default function JobList() {
 
                                         <div className="card-body" id='card-body'>
                                             <p className="card-text">
+                                                <b>Job ID: </b> {post._id}
+                                                <br></br>
+                                                <br></br>
                                                 <b>Descriptions: </b>{post.descriptions.slice(0, 250)}...
                                             </p>
                                             <ButtonBlue onClick={() => { navigate(`${post._id}`) }} name="See Details" size='med'></ButtonBlue>
@@ -226,7 +229,7 @@ export default function JobList() {
                                             <div className="card-body" id='card-body'>
                                                 <h4 className="card-title">{north.job_title}</h4>
                                                 <p className="card-text">
-                                                    {north.location}
+                                                    {north.location}, New Zealand
                                                 </p>
                                                 <p>
                                                     <b>Email: </b>{north.email}
@@ -241,7 +244,10 @@ export default function JobList() {
 
                                             <div className="card-body" id='card-body'>
                                                 <p className="card-text">
-                                                <b>Descriptions: </b>{north.descriptions.slice(0, 250)}...
+                                                    <b>Job ID: </b> {north._id}
+                                                    <br></br>
+                                                    <br></br>
+                                                    <b>Descriptions: </b>{north.descriptions.slice(0, 250)}...
                                                 </p>
                                                 <ButtonBlue onClick={() => { navigate(`${north._id}`) }} name="See Details" size='med'></ButtonBlue>
                                             </div>
@@ -274,7 +280,7 @@ export default function JobList() {
                                             <div className="card-body" id='card-body'>
                                                 <h4 className="card-title">{auck.job_title}</h4>
                                                 <p className="card-text">
-                                                    {auck.location}
+                                                    {auck.location}, New Zealand
                                                 </p>
                                                 <p>
                                                     <b>Email: </b>{auck.email}
@@ -289,6 +295,9 @@ export default function JobList() {
 
                                             <div className="card-body" id='card-body'>
                                                 <p className="card-text">
+                                                    <b>Job ID: </b> {auck._id}
+                                                    <br></br>
+                                                    <br></br>
                                                     <b>Descriptions: </b>{auck.descriptions.slice(0, 250)}...
                                                 </p>
                                                 <ButtonBlue onClick={() => { navigate(`${auck._id}`) }} name="See Details" size='med'></ButtonBlue>
@@ -318,7 +327,7 @@ export default function JobList() {
                                             <div className="card-body" id='card-body'>
                                                 <h4 className="card-title">{wlg.job_title}</h4>
                                                 <p className="card-text">
-                                                    {wlg.location}
+                                                    {wlg.location}, New Zealand
                                                 </p>
                                                 <p>
                                                     <b>Email: </b>{wlg.email}
@@ -333,6 +342,9 @@ export default function JobList() {
 
                                             <div className="card-body" id='card-body'>
                                                 <p className="card-text">
+                                                    <b>Job ID: </b> {wlg._id}
+                                                    <br></br>
+                                                    <br></br>
                                                     <b>Descriptions: </b>{wlg.descriptions.slice(0, 250)}...
                                                 </p>
                                                 <ButtonBlue onClick={() => { navigate(`${wlg._id}`) }} name="See Details" size='med'></ButtonBlue>
@@ -361,7 +373,7 @@ export default function JobList() {
                                             <div className="card-body" id='card-body'>
                                                 <h4 className="card-title">{dune.job_title}</h4>
                                                 <p className="card-text">
-                                                    {dune.location}
+                                                    {dune.location}, New Zealand
                                                 </p>
                                                 <p>
                                                     <b>Email: </b>{dune.email}
@@ -376,6 +388,9 @@ export default function JobList() {
 
                                             <div className="card-body" id='card-body'>
                                                 <p className="card-text">
+                                                    <b>Job ID: </b> {dune._id}
+                                                    <br></br>
+                                                    <br></br>
                                                     <b>Descriptions: </b>{dune.descriptions.slice(0, 250)}...
                                                 </p>
                                                 <ButtonBlue onClick={() => { navigate(`${dune._id}`) }} name="See Details" size='med'></ButtonBlue>
@@ -404,7 +419,7 @@ export default function JobList() {
                                             <div className="card-body" id='card-body'>
                                                 <h4 className="card-title">{chch.job_title}</h4>
                                                 <p className="card-text">
-                                                    {chch.location}
+                                                    {chch.location}, New Zealand
                                                 </p>
                                                 <p>
                                                     <b>Email: </b>{chch.email}
@@ -419,6 +434,9 @@ export default function JobList() {
 
                                             <div className="card-body" id='card-body'>
                                                 <p className="card-text">
+                                                    <b>Job ID: </b> {chch._id}
+                                                    <br></br>
+                                                    <br></br>
                                                     <b>Descriptions: </b>{chch.descriptions.slice(0, 250)}...
                                                 </p>
                                                 <ButtonBlue onClick={() => { navigate(`${chch._id}`) }} name="See Details" size='med'></ButtonBlue>
@@ -448,7 +466,7 @@ export default function JobList() {
                                             <div className="card-body" id='card-body'>
                                                 <h4 className="card-title">{queens.job_title}</h4>
                                                 <p className="card-text">
-                                                    {queens.location}
+                                                    {queens.location}, New Zealand
                                                 </p>
                                                 <p>
                                                     <b>Email: </b>{queens.email}
@@ -463,6 +481,9 @@ export default function JobList() {
 
                                             <div className="card-body" id='card-body'>
                                                 <p className="card-text">
+                                                    <b>Job ID: </b> {queens._id}
+                                                    <br></br>
+                                                    <br></br>
                                                     <b>Descriptions: </b>{queens.descriptions.slice(0, 250)}...
                                                 </p>
                                                 <ButtonBlue onClick={() => { navigate(`${queens._id}`) }} name="See Details" size='med'></ButtonBlue>

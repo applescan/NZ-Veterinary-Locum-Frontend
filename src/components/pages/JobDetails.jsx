@@ -20,7 +20,7 @@ export default function JobDetails() {
             .get(`http://localhost:4000/jobs/search/id/${id}`)
             .then(res => {
                 console.log(res.data)
-                setPosts(res.data.currentUserInfo[0])
+                setPosts(res.data[0])
 
             })
             .catch(err => {
@@ -34,35 +34,35 @@ export default function JobDetails() {
         <div id="Doctor-login">
             {posts ?
 
-                <Wrapper id="home" className="container flexSpaceCenter">
+                <Wrapper id="home" className="container flexSpaceCenter" style={{ height: '100%' }}>
 
-                    <LeftSide className="flexCenter">
-                        <div>
-                            <h1>{posts.job_title}</h1>
-                            <h5>
-                                {posts.location}
-                            </h5>
 
-                            <hr></hr>
+                    <div>
+                        <h6><b>Job ID: </b> {posts._id}</h6>
+                        <br></br>
+                        <br></br>
+                        <h1>{posts.job_title}</h1>
+                        <h5>
+                            {posts.location}, New Zealand
+                        </h5>
+                        <br></br>
+                        <Card.Link href={`mailto:${posts.email}`}><ButtonBlue name="Email Company" style={{ marginRight: 30 }} size='sml'></ButtonBlue></Card.Link>
+                        <Card.Link href={`tel:${posts.phone}`}><ButtonBlueOutlined onClick='hello' name="Call Job Lister" style={{ marginRight: 30 }} size='sml'></ButtonBlueOutlined></Card.Link>
+                        <hr></hr>
 
-                            <p><b>Email: </b>{posts.email}</p>
-                            <p><b>Phone: </b>{posts.phone}</p>
-                            <p><b> Specialities: </b>{posts.specialities}</p>
+                        <p><b>Email: </b>{posts.email}</p>
+                        <p><b>Phone: </b>{posts.phone}</p>
+                        <p><b> Specialities: </b>{posts.specialities}</p>
+                        <hr></hr>
+                        <br></br>
+                        <h5>Job Descriptions</h5>
+                        <br></br>
+                        <p style={{ whiteSpace: 'pre-wrap' }}>{posts.descriptions}</p>
 
-                            <p>{posts.descriptions}</p>
+                        <br></br>
+                        <ButtonBlue onClick={() => { navigate(-1) }} name="Back" size='med'></ButtonBlue>
 
-                            <ButtonBlue onClick={() => { navigate(-1) }} name="Back" size='sml'></ButtonBlue>
-
-                        </div>
-                    </LeftSide>
-                    <RightSide>
-                        <div>
-                            <Card.Link href={`mailto:${posts.email}`}><ButtonBlue name="Email Company" size='sml'></ButtonBlue></Card.Link>
-                            <br></br>
-                            <br></br>
-                            <Card.Link href={`tel:${posts.phone}`}><ButtonBlueOutlined onClick='hello' name="Call Job Lister" style={{ marginRight: 30 }} size='sml'></ButtonBlueOutlined></Card.Link>
-                        </div>
-                    </RightSide>
+                    </div>
 
 
                 </Wrapper>
@@ -80,33 +80,5 @@ const Wrapper = styled.section`
           width: auto;
           display: flex;
           height: 100vh;
-          @media (max-width: 960px) {
-            display: flex;
-            flex-direction:column; 
-  }
           `;
-const LeftSide = styled.div`
-          width: 80%;
-          height: 100%;
-          margin-right:50px;
-          @media (max-width: 960px) {
-            width: auto;
-            margin: 0 10%;
-            order: 2;
-          text-align: left;
-  }
-          @media (max-width: 860px) {
-            margin: 0 10%;
-  }
-          `;
-const RightSide = styled.div`
-          width: 20%;
-          height: 100%;
-          display: flex;
-          @media (max-width: 960px) {
-            width: auto;
-            margin-bottom:  10%;
-            margin-left: 10%;
-            margin-right: 10%;
-  }
-          `;
+
