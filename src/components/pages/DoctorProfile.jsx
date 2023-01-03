@@ -23,6 +23,11 @@ import Container from '@mui/material/Container';
 import axios from 'axios';
 import UserModal from "../elements/Modal";
 import Alert from 'react-bootstrap/Alert';
+import Card from 'react-bootstrap/Card';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
 
 
 
@@ -83,12 +88,6 @@ export default function DoctorProfile() {
 
     }, []);
 
-    //console.log(user)
-
-    const [details, setDetails] = useState({
-        first_name: '', last_name: '', email: '', password: '',
-        specialities: '', phone: '', city: '', license: '', availability: '', work_requirement: ''
-    })
 
     const [error, setError] = useState(null)
 
@@ -99,7 +98,7 @@ export default function DoctorProfile() {
         setError(null)
 
         const data = new FormData(event.currentTarget);
-        console.log(data.get('first_name'))
+
 
         const first_name = data.get('first_name') == null ? currentUserInfo.first_name : data.get('first_name');
         const last_name = data.get('last_name') == null ? currentUserInfo.last_name : data.get('last_name');
@@ -114,24 +113,25 @@ export default function DoctorProfile() {
         const imageKey = FileRef.current.files[0] == null ? currentUserInfo.imageKey : FileRef.current.files[0];
 
 
+        const toSend = new FormData()
+        toSend.append('first_name', first_name)
+        toSend.append('last_name', last_name)
+        toSend.append('email', email)
+        toSend.append('password', password)
+        toSend.append('specialities', specialities)
+        toSend.append('phone', phone)
+        toSend.append('city', city)
+        toSend.append('license', license)
+        toSend.append('availability', availability)
+        toSend.append('work_requirement', work_requirement)
+        toSend.append('imageKey', imageKey)
+
         console.log("uploading")
+
         try {
             fetch(`http://localhost:4000/doctors/update/${user._id}`, {
                 method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    first_name: first_name,
-                    last_name: last_name,
-                    email: email,
-                    password: password,
-                    specialities: specialities,
-                    phone: phone,
-                    city: city,
-                    license: license,
-                    availability: availability,
-                    work_requirement: work_requirement,
-                    imageKey: imageKey
-                })
+                body: toSend
             }).then(() => {
                 window.location.reload()
             }).catch((error) => setError(error))
@@ -274,12 +274,14 @@ export default function DoctorProfile() {
                                     <Grid container spacing={2}>
 
                                         <Grid item xs={12}>
-                                            {/* <MDBFile size='lg' id='customFile' ref={FileRef} type="file" /> */}
-                                            <input ref={FileRef} type="file" />
-                                            <div className="small text-muted mt-2">Upload your profile picture. Max file size 5 MB</div>
-                                            <br></br>
+                                            <Card>
+                                                <div id='cards'>
+                                                    <input ref={FileRef} type="file" />
+                                                    <div className="small text-muted mt-2">Upload your profile picture. Max file size 5 MB</div>
+                                                </div>
+                                            </Card>
                                         </Grid>
-
+                                        <br></br>
 
                                         <Grid item xs={12} sm={6}>
                                             <TextField
@@ -290,7 +292,6 @@ export default function DoctorProfile() {
                                                 label="First Name"
                                                 autoFocus
                                                 defaultValue={currentUserInfo.first_name}
-                                            // onChange={e => setDetails({ ...details, first_name: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
@@ -301,7 +302,6 @@ export default function DoctorProfile() {
                                                 name="last_name"
                                                 autoComplete="family-name"
                                                 defaultValue={currentUserInfo.last_name}
-                                            // onChange={e => setDetails({ ...details, last_name: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -312,7 +312,6 @@ export default function DoctorProfile() {
                                                 name="email"
                                                 autoComplete="email"
                                                 defaultValue={currentUserInfo.email}
-                                            // onChange={e => setDetails({ ...details, email: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -323,8 +322,7 @@ export default function DoctorProfile() {
                                                 type="password"
                                                 id="password"
                                                 autoComplete="new-password"
-                                                defaultValue={currentUserInfo.password}
-                                            //onChange={e => setDetails({ ...details, password: e.target.value })}
+                                                placeholder={'Your password'}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -336,20 +334,27 @@ export default function DoctorProfile() {
                                                 id="phone"
                                                 autoComplete="new-phone"
                                                 defaultValue={currentUserInfo.phone}
-                                            //onChange={e => setDetails({ ...details, phone: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
-                                            <TextField
-                                                fullWidth
-                                                name="city"
-                                                label="City"
-                                                type="text"
-                                                id="city"
-                                                autoComplete="new-city"
-                                                defaultValue={currentUserInfo.city}
-                                            //onChange={e => setDetails({ ...details, city: e.target.value })}
-                                            />
+                                            <FormControl fullWidth>
+                                                <InputLabel id="city">City*</InputLabel>
+                                                <Select
+                                                    labelId="city"
+                                                    id="city"
+                                                    name="city"
+                                                    label="City"
+                                                    required
+                                                    defaultValue={currentUserInfo.city}
+                                                >
+                                                    <MenuItem value={'Northland'}>Northland</MenuItem>
+                                                    <MenuItem value={'Auckland'}>Auckland</MenuItem>
+                                                    <MenuItem value={'Wellington'}>Wellington</MenuItem>
+                                                    <MenuItem value={'Dunedin'}>Dunedin</MenuItem>
+                                                    <MenuItem value={'Christchurch'}>Christchurch</MenuItem>
+                                                    <MenuItem value={'Queenstown'}>Queenstown</MenuItem>
+                                                </Select>
+                                            </FormControl>
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
                                             <TextField
@@ -360,7 +365,6 @@ export default function DoctorProfile() {
                                                 id="license"
                                                 autoComplete="new-license"
                                                 defaultValue={currentUserInfo.license}
-                                            //onChange={e => setDetails({ ...details, license: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -374,7 +378,6 @@ export default function DoctorProfile() {
                                                 multiline
                                                 rows={2}
                                                 defaultValue={currentUserInfo.specialities}
-                                            //onChange={e => setDetails({ ...details, specialities: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -388,7 +391,6 @@ export default function DoctorProfile() {
                                                 multiline
                                                 rows={2}
                                                 defaultValue={currentUserInfo.availability}
-                                            //onChange={e => setDetails({ ...details, availability: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -403,7 +405,6 @@ export default function DoctorProfile() {
                                                 multiline
                                                 rows={2}
                                                 defaultValue={currentUserInfo.work_requirement}
-                                            //onChange={e => setDetails({ ...details, work_requirement: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>

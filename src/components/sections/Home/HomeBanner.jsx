@@ -17,7 +17,7 @@ export default function HomeBanner() {
                 <h1>Join our network to help locums find better job opportunities,
                     better experiences, and better lives for our pets in Aotearoa New Zealand</h1>
                 <br></br>
-                <ButtonBlue onClick={() => { navigate(`/job-search`) }} name="See Job Listings"></ButtonBlue>
+                <ButtonBlue onClick={() => { navigate(`/job-search`) }} name="See Job Listings" size='sml'></ButtonBlue>
             </div>
         </div>
 

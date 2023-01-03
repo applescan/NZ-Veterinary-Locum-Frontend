@@ -15,14 +15,13 @@ import {
 } from 'mdb-react-ui-kit';
 import ButtonBlue from "../elements/ButtonBlue";
 import ButtonBlueOutlined from "../elements/ButtonBlueOutlined";
+import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import axios from 'axios';
-import UserModal from "../elements/Modal";
-import Alert from 'react-bootstrap/Alert';
 
 
 
@@ -30,39 +29,15 @@ const theme = createTheme();
 
 export default function DoctorProfile() {
 
-    const FileRef = React.useRef()
     const navigate = useNavigate()
-
-    //use state for getting user info and user from local storage
     const { user, setUser } = useContext(CustomContext)
     const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
-
-    //usestate for edit toggle button
     const [isOpen, setOpen] = React.useState(false);
+    const FileRef = React.useRef()
+
     //when edit button is clicked, the update form will appear
     const handleToggle = () => {
         setOpen(!isOpen);
-    };
-
-    //usestate for modal
-    const [show, setShow] = useState(false);
-    //closing and opening modal functions
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    //when modal delete button is clicked, it will delete the user profile data 
-    const handleChanges = async (event) => {
-        event.preventDefault();
-
-        try {
-            await axios.delete(`http://localhost:4000/doctors/delete/${user._id}`);
-            localStorage.clear(); //clear user data on sign-out 
-            setCurrentUserInfo({})
-            navigate('/')
-            window.location.reload()
-        } catch (error) {
-            console.log(error);
-        }
     };
 
     //check if there's user data on page load
@@ -133,6 +108,7 @@ export default function DoctorProfile() {
                     imageKey: imageKey
                 })
             }).then(() => {
+                //console.log(imageKey)
                 window.location.reload()
             }).catch((error) => setError(error))
         } catch (error) {
@@ -236,13 +212,7 @@ export default function DoctorProfile() {
                                 </MDBCardBody>
                             </MDBCard>
                             <ButtonBlue name="Edit Details" style={{ marginRight: 30 }} onClick={handleToggle} size='sml'></ButtonBlue>
-                            <ButtonBlueOutlined name="Delete Profile" style={{ marginRight: 30 }} onClick={() => handleShow()} size='sml'></ButtonBlueOutlined>
-
-
-                            {/* modal for user deletion*/}
-                            <UserModal show={show} handleClose={handleClose} handleShow={handleShow} handleChanges={handleChanges} nameClose='Cancel' nameOpen='Delete Profile'
-                                title='We are sad to see you go! 😔' text='Are you sure you want to delete your profile? You can not undo this action' />
-
+                            <ButtonBlueOutlined name="Delete Profile" style={{ marginRight: 30 }} size='sml'></ButtonBlueOutlined>
 
                         </MDBCol>
                     </MDBRow>
@@ -428,11 +398,7 @@ export default function DoctorProfile() {
 
     // if there's no user, show the login form
     return (
-        <div id='card-page'>
-            <br></br>
-            <br></br>
-            <Alert id='cards'>Please sign in</Alert>
-        </div>
+        <div>Please login</div>
     );
 
 }

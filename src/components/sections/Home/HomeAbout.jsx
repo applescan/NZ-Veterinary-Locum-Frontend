@@ -15,7 +15,7 @@ export default function About() {
                     <div>
                         <h3>NZ Veterinary Locum Network is a collective organization for locums and clinics to find each other in a single platform.</h3>
                         <br></br>
-                        <ButtonBlue onClick={() => { navigate(`/about`) }} name="Learn More"></ButtonBlue>
+                        <ButtonBlue onClick={() => { navigate(`/about`) }} name="Learn More" size='sml'></ButtonBlue>
                     </div>
                 </LeftSide>
 
