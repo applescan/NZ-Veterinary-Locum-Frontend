@@ -37,7 +37,7 @@ export default function DoctorList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/doctors/all')
+            .get('https://nz-locum-backend.herokuapp.com/doctors/all')
             .then(res => {
                 console.log(res)
                 setPost(res.data)
@@ -50,7 +50,7 @@ export default function DoctorList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/doctors/search/city/north')
+            .get('https://nz-locum-backend.herokuapp.com/doctors/search/city/north')
             .then(res => {
                 //console.log(res)
                 setNorthland(res.data)
@@ -63,7 +63,7 @@ export default function DoctorList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/doctors/search/city/auck')
+            .get('https://nz-locum-backend.herokuapp.com/doctors/search/city/auck')
             .then(res => {
                 //console.log(res)
                 setAuckland(res.data)
@@ -76,7 +76,7 @@ export default function DoctorList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/doctors/search/city/well')
+            .get('https://nz-locum-backend.herokuapp.com/doctors/search/city/well')
             .then(res => {
                 //console.log(res)
                 setWellington(res.data)
@@ -89,7 +89,7 @@ export default function DoctorList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/doctors/search/city/dun')
+            .get('https://nz-locum-backend.herokuapp.com/doctors/search/city/dun')
             .then(res => {
                 //console.log(res)
                 setDunedin(res.data)
@@ -102,7 +102,7 @@ export default function DoctorList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/doctors/search/city/chr')
+            .get('https://nz-locum-backend.herokuapp.com/doctors/search/city/chr')
             .then(res => {
                 //console.log(res)
                 setChristchurch(res.data)
@@ -115,7 +115,7 @@ export default function DoctorList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/doctors/search/city/queen')
+            .get('https://nz-locum-backend.herokuapp.com/doctors/search/city/queen')
             .then(res => {
                 //console.log(res)
                 setQueenstown(res.data)
@@ -179,7 +179,7 @@ export default function DoctorList() {
                         {posts.map(post =>
                             <Col>
                                 <Card style={{ width: 'auto' }}>
-                                    <Card.Img variant="top" src={`http://localhost:4000/images/${post.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
+                                    <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${post.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
                                     <div id='cards'>
                                         <Card.Title>Dr. {post.first_name} {post.last_name} </Card.Title>
                                         <Card.Text>
@@ -214,7 +214,7 @@ export default function DoctorList() {
                             {northland.map(north =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${north.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${north.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
                                         <div id='cards'>
                                             <Card.Title>Dr. {north.first_name} {north.last_name} </Card.Title>
                                             <Card.Text>
@@ -251,7 +251,7 @@ export default function DoctorList() {
                             {auckland.map(auck =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${auck.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${auck.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
                                         <div id='cards'>
                                             <Card.Title>Dr. {auck.first_name} {auck.last_name} </Card.Title>
                                             <Card.Text>
@@ -288,7 +288,7 @@ export default function DoctorList() {
                             {wellington.map(wlg =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${wlg.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${wlg.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
                                         <div id='cards'>
                                             <Card.Title>Dr. {wlg.first_name} {wlg.last_name} </Card.Title>
                                             <Card.Text>
@@ -325,7 +325,7 @@ export default function DoctorList() {
                             {dunedin.map(dune =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${dune.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${dune.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
                                         <div id='cards'>
                                             <Card.Title>Dr. {dune.first_name} {dune.last_name} </Card.Title>
                                             <Card.Text>
@@ -362,7 +362,7 @@ export default function DoctorList() {
                             {christchurch.map(chch =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${chch.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${chch.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
                                         <div id='cards'>
                                             <Card.Title>Dr. {chch.first_name} {chch.last_name} </Card.Title>
                                             <Card.Text>
@@ -399,7 +399,7 @@ export default function DoctorList() {
                             {queenstown.map(queens =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`http://localhost:4000/images/${queens.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${queens.imageKey}`} style={{ width: 'auto', height: '300px', objectFit: 'cover' }} />
                                         <div id='cards'>
                                             <Card.Title>Dr. {queens.first_name} {queens.last_name} </Card.Title>
                                             <Card.Text>

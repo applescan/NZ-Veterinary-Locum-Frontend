@@ -60,7 +60,7 @@ export default function DoctorProfile() {
         event.preventDefault();
 
         try {
-            await axios.delete(`http://localhost:4000/doctors/delete/${user._id}`);
+            await axios.delete(`https://nz-locum-backend.herokuapp.com/delete/${user._id}`);
             localStorage.clear(); //clear user data on sign-out 
             setCurrentUserInfo({})
             navigate('/')
@@ -79,7 +79,7 @@ export default function DoctorProfile() {
 
             //getting current user's data based on the id stored in local storage
             const getUserById = async () => {
-                const res = await axios.get(`http://localhost:4000/doctors/search/${user._id}`);
+                const res = await axios.get(`https://nz-locum-backend.herokuapp.com/doctors/search/${user._id}`);
                 setCurrentUserInfo(res.data.currentUserInfo[0])
                 console.log(res.data.currentUserInfo[0])
             };
@@ -129,7 +129,7 @@ export default function DoctorProfile() {
         console.log("uploading")
 
         try {
-            fetch(`http://localhost:4000/doctors/update/${user._id}`, {
+            fetch(`https://nz-locum-backend.herokuapp.com/doctors/update/${user._id}`, {
                 method: "POST",
                 body: toSend
             }).then(() => {
@@ -153,7 +153,7 @@ export default function DoctorProfile() {
                             <MDBCard className="mb-4">
                                 <MDBCardBody className="text-center">
                                     <MDBCardImage
-                                        src={`http://localhost:4000/images/${currentUserInfo.imageKey}`}
+                                        src={`https://nz-locum-backend.herokuapp.com/images/${currentUserInfo.imageKey}`}
                                         alt="avatar"
                                         className="rounded"
                                         style={{ width: '200px', height: '200px', objectFit: 'cover' }}
