@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { createTheme } from '@mui/material/styles';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
@@ -20,12 +19,11 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 
-const theme = createTheme();
 
 export default function SignUp() {
 
     //setting the cureent user's info. It will be used in the doctor's profile pages through context.
-    const { currentUserInfoClinic, setCurrentUserInfoClinic } = useContext(CustomContext)
+    const { setCurrentUserInfoClinic } = useContext(CustomContext)
 
     const [details, setDetails] = useState({
         business_name: '', email: '', password: '', specialities: '', phone: '', address: '', hours: ''
@@ -61,7 +59,7 @@ export default function SignUp() {
         toSend.append('hours', details.hours)
         toSend.append('imageKey', FileRef.current.files[0])
         console.log("uploading")
-        axios.post('http://localhost:4000/clinics/add', toSend, {
+        axios.post('https://nz-locum-backend.herokuapp.com/clinics/add', toSend, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "multipart/form-data"

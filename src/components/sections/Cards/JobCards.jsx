@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Alert from 'react-bootstrap/Alert';
 import ButtonBlue from '../../elements/ButtonBlue';
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import {
     MDBTabs,
@@ -37,7 +36,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/jobs/all')
+            .get('https://nz-locum-backend.herokuapp.com/jobs/all')
             .then(res => {
                 console.log(res)
                 setPost(res.data)
@@ -50,7 +49,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/jobs/search/north')
+            .get('https://nz-locum-backend.herokuapp.com/jobs/search/north')
             .then(res => {
                 //console.log(res)
                 setNorthland(res.data)
@@ -63,7 +62,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/jobs/search/auck')
+            .get('https://nz-locum-backend.herokuapp.com/jobs/search/auck')
             .then(res => {
                 //console.log(res)
                 setAuckland(res.data)
@@ -76,7 +75,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/jobs/search/well')
+            .get('https://nz-locum-backend.herokuapp.com/jobs/search/well')
             .then(res => {
                 //console.log(res)
                 setWellington(res.data)
@@ -89,7 +88,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/jobs/search/dun')
+            .get('https://nz-locum-backend.herokuapp.com/jobs/search/dun')
             .then(res => {
                 //console.log(res)
                 setDunedin(res.data)
@@ -102,7 +101,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/jobs/search/chri')
+            .get('https://nz-locum-backend.herokuapp.com/jobs/search/chri')
             .then(res => {
                 //console.log(res)
                 setChristchurch(res.data)
@@ -115,7 +114,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/jobs/search/queen')
+            .get('https://nz-locum-backend.herokuapp.com/jobs/search/queen')
             .then(res => {
                 //console.log(res)
                 setQueenstown(res.data)

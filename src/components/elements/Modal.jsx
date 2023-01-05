@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import React from "react";
+import { Modal } from "react-bootstrap";
 import ButtonBlueOutlined from "./ButtonBlueOutlined";
 import ButtonBlue from "./ButtonBlue";
 
 
 const UserModal = (props) => {
 
-    const { show, handleClose, handleShow, handleChanges, nameClose, nameOpen } = props
+    const { show, handleClose, handleChanges, nameClose, nameOpen } = props
 
     return (
         <div>

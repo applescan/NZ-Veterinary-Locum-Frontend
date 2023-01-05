@@ -21,9 +21,9 @@ export default function NavBar() {
 
     const [showNav, setShowNav] = useState(false);
     const { user, setUser } = useContext(CustomContext)
-    const { currentUserInfo, setCurrentUserInfo } = useContext(CustomContext)
+    const { setCurrentUserInfo } = useContext(CustomContext)
     const { userClinic, setUserClinic } = useContext(CustomContext)
-    const { currentUserInfoClinic, setCurrentUserInfoClinic } = useContext(CustomContext)
+    const { setCurrentUserInfoClinic } = useContext(CustomContext)
     const navigate = useNavigate()
 
     const handleLogout = () => {
