@@ -114,7 +114,7 @@ video {
 /* loading page animation */
 
 .load-wrapp {
-  padding-top: 40vh;
+  /* padding-top: 40vh; */
   text-align: center;
   display: block;
   background-color: #fff;

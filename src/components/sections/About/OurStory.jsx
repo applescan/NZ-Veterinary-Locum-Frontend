@@ -76,7 +76,7 @@ const Wrapper2 = styled.section`
 const LeftSide = styled.div`
   width: 50%;
   height: 100%;
-  padding-top: 150px;
+  padding-top: 120px;
   padding-right:50px;
   
   @media (max-width: 960px) {
