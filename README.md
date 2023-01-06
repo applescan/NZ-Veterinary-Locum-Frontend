@@ -58,8 +58,10 @@ How to run on your own system:
 - If everything was successful, the page will show up.
 
 ### Bug / Feature Request
-- Known limitations as for now is, when you register a user an uploaded image that's larger than 1mb, it will continuously stay in the loading page, this is because the SSL certificate from the cloud server doesn't allow large file to be send. On console log it will show that it's a CORS issue.
-If you discover more bug (the website was unable to process the query and/or returned undesirable results), kindly open an issue [here](https://github.com/applescan/NZ-Veterinary-Locum-CapstoneProject/issues/new) by mentioning your search term and the desired outcome. 
+- Known limitations: When you register a user an uploaded image that's larger than 1mb, it will continuously stay in the loading page, 
+this is because the SSL certificate from the cloud server doesn't allow large file to be send. On console log it will show that it's a CORS issue.
+- If you're running the backend in your local, there should be no problem with CORS and uploading image larger than 1mb.
+- If you discover more bug (the website was unable to process the query and/or returned undesirable results), kindly open an issue [here](https://github.com/applescan/NZ-Veterinary-Locum-Frontend/issues/new) by mentioning your search term and the desired outcome. 
 
 ## Author
 
