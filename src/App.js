@@ -5,9 +5,6 @@ import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/elements/NavBar';
 import Context from './context/Context';
 import SignIn from './components/pages/SignIn';
-import ClinicList from './components/pages/ClinicList';
-import DoctorList from './components/pages/DoctorList';
-import JobList from './components/pages/JobList'
 import Home from './components/pages/Home';
 import SignUp from './components/pages/SignUp';
 import About from './components/pages/About';
@@ -20,7 +17,9 @@ import JobDetails from './components/pages/JobDetails'
 import Footer from './components/elements/Footer'
 const LazyDoctorProfile = React.lazy(() => import('./components/pages/DoctorProfile'))
 const LazyClinicProfile = React.lazy(() => import('./components/pages/ClinicProfile'))
-
+const LazyDoctorList = React.lazy(() => import('./components/pages/DoctorList'))
+const LazyClinicList = React.lazy(() => import('./components/pages/ClinicList'))
+const LazyJobList = React.lazy(() => import('./components/pages/JobList'))
 
 function App() {
 
@@ -37,12 +36,14 @@ function App() {
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/sign-up-doctor' element={<SignUpDoctor />} />
           <Route path='/sign-up-clinic' element={<SignUpClinic />} />
-          <Route path='/clinics' element={<ClinicList />} />
-          <Route path='/doctors' element={<DoctorList />} />
-          <Route path='/job-search' element={<JobList />} />
           <Route path="/job-search/:id" element={<JobDetails />} />
           <Route path='/about' element={<About />} />
-          
+          <Route path="/job-search" element={<React.Suspense fallback={<Loading />}>
+            <LazyJobList /></React.Suspense>}></Route>
+          <Route path="/doctors" element={<React.Suspense fallback={<Loading />}>
+            <LazyDoctorList /></React.Suspense>}></Route>
+          <Route path="/clinics" element={<React.Suspense fallback={<Loading />}>
+            <LazyClinicList /></React.Suspense>}></Route>
           <Route path="/doctor-profile" element={<React.Suspense fallback={<Loading />}>
             <LazyDoctorProfile /></React.Suspense>}></Route>
           <Route path="/clinic-profile" element={<React.Suspense fallback={<Loading />}>

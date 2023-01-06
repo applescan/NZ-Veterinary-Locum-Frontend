@@ -28,6 +28,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
+import Loading from "../elements/Loading";
 
 
 
@@ -60,7 +61,7 @@ export default function DoctorProfile() {
         event.preventDefault();
 
         try {
-            await axios.delete(`https://nz-locum-backend.herokuapp.com/delete/${user._id}`);
+            await axios.delete(`https://www.nz-vet-locum.online/doctors/delete/${user._id}`);
             localStorage.clear(); //clear user data on sign-out 
             setCurrentUserInfo({})
             navigate('/')
@@ -79,7 +80,7 @@ export default function DoctorProfile() {
 
             //getting current user's data based on the id stored in local storage
             const getUserById = async () => {
-                const res = await axios.get(`https://nz-locum-backend.herokuapp.com/doctors/search/${user._id}`);
+                const res = await axios.get(`https://www.nz-vet-locum.online/doctors/search/${user._id}`);
                 setCurrentUserInfo(res.data.currentUserInfo[0])
                 console.log(res.data.currentUserInfo[0])
             };
@@ -90,12 +91,14 @@ export default function DoctorProfile() {
 
 
     const [error, setError] = useState(null)
+    const [uploading, setUploading] = useState(false)
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         setError(null)
+        setUploading(true)
 
         const data = new FormData(event.currentTarget);
 
@@ -126,10 +129,8 @@ export default function DoctorProfile() {
         toSend.append('work_requirement', work_requirement)
         toSend.append('imageKey', imageKey)
 
-        console.log("uploading")
-
         try {
-            fetch(`https://nz-locum-backend.herokuapp.com/doctors/update/${user._id}`, {
+            fetch(`https://www.nz-vet-locum.online/doctors/update/${user._id}`, {
                 method: "POST",
                 body: toSend
             }).then(() => {
@@ -137,10 +138,23 @@ export default function DoctorProfile() {
             }).catch((error) => setError(error))
         } catch (error) {
             console.log(error.msg)
+            setUploading(false)
         }
     };
 
 
+    //when uploading image show the uploading animation
+    if (uploading === true) {
+        return <>
+            <Loading />
+        </>
+    }
+    // if there's a user but the get current info hasn't loaded yet then show loading screen
+    if (user && !currentUserInfo) {
+        return <>
+            <Loading />
+        </>
+    }
     // if there's a user and user's info, show their profile
     if (user && currentUserInfo) {
         return <>
@@ -153,7 +167,7 @@ export default function DoctorProfile() {
                             <MDBCard className="mb-4">
                                 <MDBCardBody className="text-center">
                                     <MDBCardImage
-                                        src={`https://nz-locum-backend.herokuapp.com/images/${currentUserInfo.imageKey}`}
+                                        src={`https://www.nz-vet-locum.online/images/${currentUserInfo.imageKey}`}
                                         alt="avatar"
                                         className="rounded"
                                         style={{ width: '200px', height: '200px', objectFit: 'cover' }}
@@ -277,7 +291,7 @@ export default function DoctorProfile() {
                                             <Card>
                                                 <div id='cards'>
                                                     <input ref={FileRef} type="file" />
-                                                    <div className="small text-muted mt-2">Upload your profile picture. Max file size 5 MB</div>
+                                                    <div className="small text-muted mt-2">Upload your profile picture. Max file size 1 MB</div>
                                                 </div>
                                             </Card>
                                         </Grid>

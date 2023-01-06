@@ -57,6 +57,7 @@ const Title = styled.section`
   justify-content: center;
   @media (max-width: 960px) {
     flex-direction: column;
+    padding-bottom: 60px;
   }
 `;
 
@@ -81,6 +82,7 @@ const Links = styled.section`
   color: #5BA4EE;
   @media (max-width: 960px) {
     flex-direction: column;
+    padding-bottom: 60px;
   }
 `;
 
@@ -92,7 +94,7 @@ padding: 5%;
 
 @media (max-width: 960px) {
   width: 100%;
-  padding: 0 50px;
+  padding-bottom: 60px;
   text-align: center;
 }
 `;
@@ -104,7 +106,7 @@ const RightSide = styled.div`
 
   @media (max-width: 960px) {
     width: 100%;
-    padding: 0 50px;
+    padding-bottom: 60px;
     text-align: center;
   }
 `;

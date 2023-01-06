@@ -11,6 +11,7 @@ import {
     MDBTabsPane
 } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
+import Loading from "../../elements/Loading";
 
 
 export default function JobList() {
@@ -36,7 +37,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/jobs/all')
+            .get('https://www.nz-vet-locum.online/jobs/all')
             .then(res => {
                 console.log(res)
                 setPost(res.data)
@@ -49,7 +50,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/jobs/search/north')
+            .get('https://www.nz-vet-locum.online/jobs/search/north')
             .then(res => {
                 //console.log(res)
                 setNorthland(res.data)
@@ -62,7 +63,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/jobs/search/auck')
+            .get('https://www.nz-vet-locum.online/jobs/search/auck')
             .then(res => {
                 //console.log(res)
                 setAuckland(res.data)
@@ -75,7 +76,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/jobs/search/well')
+            .get('https://www.nz-vet-locum.online/jobs/search/well')
             .then(res => {
                 //console.log(res)
                 setWellington(res.data)
@@ -88,7 +89,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/jobs/search/dun')
+            .get('https://www.nz-vet-locum.online/jobs/search/dun')
             .then(res => {
                 //console.log(res)
                 setDunedin(res.data)
@@ -101,7 +102,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/jobs/search/chri')
+            .get('https://www.nz-vet-locum.online/jobs/search/chri')
             .then(res => {
                 //console.log(res)
                 setChristchurch(res.data)
@@ -114,7 +115,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/jobs/search/queen')
+            .get('https://www.nz-vet-locum.online/jobs/search/queen')
             .then(res => {
                 //console.log(res)
                 setQueenstown(res.data)
@@ -125,7 +126,14 @@ export default function JobList() {
             })
     }, []) //only do get request on load
 
-
+    
+    // if the posts haven't loaded yet then show loading screen
+    if (!posts) {
+        return <>
+            <Loading />
+        </>
+    }
+    // if the post has loaded show UI
     return (
         <>
             <MDBTabs pills justify className='mb-3' id='cards'>

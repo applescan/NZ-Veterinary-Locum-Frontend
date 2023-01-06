@@ -14,6 +14,7 @@ import {
     MDBTabsContent,
     MDBTabsPane
 } from 'mdb-react-ui-kit';
+import Loading from "../../elements/Loading";
 
 export default function ClinicList() {
 
@@ -37,7 +38,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/clinics/all')
+            .get('https://www.nz-vet-locum.online/clinics/all')
             .then(res => {
                 console.log(res)
                 setPost(res.data)
@@ -50,7 +51,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/clinics/search/city/north')
+            .get('https://www.nz-vet-locum.online/clinics/search/city/north')
             .then(res => {
                 //console.log(res)
                 setNorthland(res.data)
@@ -63,7 +64,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/clinics/search/city/auck')
+            .get('https://www.nz-vet-locum.online/clinics/search/city/auck')
             .then(res => {
                 //console.log(res)
                 setAuckland(res.data)
@@ -76,7 +77,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/clinics/search/city/well')
+            .get('https://www.nz-vet-locum.online/clinics/search/city/well')
             .then(res => {
                 //console.log(res)
                 setWellington(res.data)
@@ -89,7 +90,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/clinics/search/city/dun')
+            .get('https://www.nz-vet-locum.online/clinics/search/city/dun')
             .then(res => {
                 //console.log(res)
                 setDunedin(res.data)
@@ -102,7 +103,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/clinics/search/city/chr')
+            .get('https://www.nz-vet-locum.online/clinics/search/city/chr')
             .then(res => {
                 //console.log(res)
                 setChristchurch(res.data)
@@ -115,7 +116,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://nz-locum-backend.herokuapp.com/clinics/search/city/queen')
+            .get('https://www.nz-vet-locum.online/clinics/search/city/queen')
             .then(res => {
                 //console.log(res)
                 setQueenstown(res.data)
@@ -126,7 +127,13 @@ export default function ClinicList() {
             })
     }, []) //only do get request on load
 
-
+    // if the posts haven't loaded yet then show loading screen
+    if (!posts) {
+        return <>
+            <Loading />
+        </>
+    }
+    // if the post has loaded show UI
     return (
         <>
             <MDBTabs pills justify className='mb-3' id='cards'>
@@ -179,7 +186,7 @@ export default function ClinicList() {
                         {posts.map(post =>
                             <Col>
                                 <Card style={{ width: 'auto' }}>
-                                    <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${post.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                    <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${post.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                     <br></br>
                                     <div id='cards'>
                                         <Card.Title>{post.business_name} </Card.Title>
@@ -214,7 +221,7 @@ export default function ClinicList() {
                             {northland.map(north =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${north.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${north.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{north.business_name} </Card.Title>
@@ -251,7 +258,7 @@ export default function ClinicList() {
                             {auckland.map(auck =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${auck.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${auck.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{auck.business_name} </Card.Title>
@@ -288,7 +295,7 @@ export default function ClinicList() {
                             {wellington.map(wlg =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${wlg.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${wlg.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{wlg.business_name} </Card.Title>
@@ -324,7 +331,7 @@ export default function ClinicList() {
                             {dunedin.map(dune =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${dune.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${dune.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{dune.business_name} </Card.Title>
@@ -361,7 +368,7 @@ export default function ClinicList() {
                             {christchurch.map(chch =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${chch.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${chch.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{chch.business_name} </Card.Title>
@@ -398,7 +405,7 @@ export default function ClinicList() {
                             {queenstown.map(queens =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://nz-locum-backend.herokuapp.com/images/${queens.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${queens.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{queens.business_name} </Card.Title>
@@ -431,9 +438,9 @@ export default function ClinicList() {
         </>
 
 
-    );
-}
 
+    )
+}
 
 
 

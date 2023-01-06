@@ -6,28 +6,29 @@ import { useNavigate } from 'react-router-dom'
 
 export default function About() {
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    return (
-        <>
-            <Wrapper id="Home-about" className="container flexSpaceCenter">
-                <LeftSide className="flexCenter">
-                    <div>
-                        <h3>NZ Veterinary Locum Network is a collective organization for locums and clinics to find each other in a single platform.</h3>
-                        <br></br>
-                        <ButtonBlue onClick={() => { navigate(`/about`) }} name="Learn More" size='sml'></ButtonBlue>
-                    </div>
-                </LeftSide>
+  return (
+    <>
+      <Wrapper id="Home-about" className="container flexSpaceCenter">
+        <LeftSide className="flexCenter">
+          <div>
+            <h4>NZ Veterinary Locum Network is a collective organization</h4>
+            <p>For locums and clinics to find each other in a single platform.</p>
+            <br></br>
+            <ButtonBlue onClick={() => { navigate(`/about`) }} name="Learn More" size='sml'></ButtonBlue>
+          </div>
+        </LeftSide>
 
 
-                <RightSide>
-                    <img src={AboutImg} className='img-fluid rounded' alt='vet with a dog smiling' />
+        <RightSide>
+          <img src={AboutImg} className='img-fluid rounded' alt='vet with a dog smiling' />
 
-                </RightSide>
-            </Wrapper>
+        </RightSide>
+      </Wrapper>
 
-        </>
-    );
+    </>
+  );
 }
 
 

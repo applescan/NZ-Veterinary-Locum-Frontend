@@ -6,7 +6,7 @@ import ButtonBlue from "./ButtonBlue";
 
 const UserModal = (props) => {
 
-    const { show, handleClose, handleChanges, nameClose, nameOpen } = props
+    const { show, handleClose, handleShow, handleChanges, nameClose, nameOpen } = props
 
     return (
         <div>
