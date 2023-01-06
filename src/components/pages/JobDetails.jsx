@@ -17,7 +17,7 @@ export default function JobDetails() {
 
     useEffect(() => {
         axios
-            .get(`https://nz-locum-backend.herokuapp.com/jobs/search/id/${id}`)
+            .get(`https://www.nz-vet-locum.online/jobs/search/id/${id}`)
             .then(res => {
                 console.log(res.data)
                 setPosts(res.data[0])
@@ -34,7 +34,7 @@ export default function JobDetails() {
         <div id="Doctor-login">
             {posts ?
 
-                <Wrapper id="home" className="container flexSpaceCenter" style={{ height: '100%' }}>
+                <Wrapper style={{ height: '100%' }}>
 
 
                     <div>
@@ -76,7 +76,7 @@ export default function JobDetails() {
 
 
 const Wrapper = styled.section`
-          padding: 100px 0;
+          padding: 100px 10%;
           width: auto;
           display: flex;
           height: 100vh;
