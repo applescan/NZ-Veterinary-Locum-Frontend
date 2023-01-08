@@ -36,11 +36,16 @@ filling a specialized need for a distinct sector on the website rather than spec
 ## Demo
 Here is a working live demo :  https://nz-locum-network.netlify.app/
 
+## Figma 
+- Software Architecture and Task Timeline: https://www.figma.com/file/kqeMSGwcqMYjBFViLUcspq/NZ-Veterinary-Locum?node-id=0%3A1&t=IdnttLOPOBcoOuM0-0
+- Wireframe designs: https://www.figma.com/file/kqeMSGwcqMYjBFViLUcspq/NZ-Veterinary-Locum?node-id=2%3A2&t=IdnttLOPOBcoOuM0-0
 
 ### Built with
 •	Axios
 •	Bootstrap
 •	CSS
+•	Canva
+•	Figma
 •	React
 •	MUI
 •	MDB Bootstrap
