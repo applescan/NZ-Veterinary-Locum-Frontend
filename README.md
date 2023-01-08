@@ -55,9 +55,17 @@ Here is a working live demo :  https://nz-locum-network.netlify.app/
 •	Node.js
 
 ### User Guide
-How to run on your own system:
+How to run on your own system using NZ Veterinary Locum online back-end server:
 - Copy/fork this repository to your github/local drive
 - In the folder, run the command ``npm install``
+- In the folder, run the command ``npm start``
+- Once running, open a browser and open ``http://localhost:3000``
+- If everything was successful, the page will show up.
+
+How to run on your own system using localhost:
+- Copy/fork this repository to your github/local drive
+- In the folder, run the command ``npm install``
+- Change all the links for all axios and fetch request to "http://localhost:4000/url/path". Url and path respective to each route you're trying to access
 - In the folder, run the command ``npm start``
 - Once running, open a browser and open ``http://localhost:3000``
 - If everything was successful, the page will show up.
