@@ -71,9 +71,7 @@ How to run on your own system using localhost:
 - If everything was successful, the page will show up.
 
 ### Bug / Feature Request
-- Known limitations: When you register a user, any uploaded image that's larger than 1mb will make user continuously stay in the loading page, 
-this is because the TSL certificate from the cloud server is build with an older version of security policies, your browser won't allow large file to be send. 
-On console log it will show that it's a CORS issue. More information regarding TSL certificate can be found here https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html
+- Known limitations: When you register a user, any uploaded image that's larger than 1 Mb will not go through, this is because the TSL certificate from the cloud server is built with an older version of security policies, your browser won't allow a large file to be sent. The console log will show that it's a CORS issue.. More information regarding TSL certificate can be found here https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html
 - If you're running the backend in your local, there should be no problem with CORS and uploading image larger than 1mb.
 - If you discover more bug (the website was unable to process the query and/or returned undesirable results), kindly open an issue [here](https://github.com/applescan/NZ-Veterinary-Locum-Frontend/issues/new) by mentioning your search term and the desired outcome. 
 
