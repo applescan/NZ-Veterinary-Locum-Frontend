@@ -56,18 +56,29 @@ export default function DoctorProfile() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    //when modal delete button is clicked, it will delete the user profile data 
+    //when modal delete button is clicked, it will delete the user profile data and all jobs data connected by the clinic id
     const handleChanges = async (event) => {
         event.preventDefault();
 
         try {
-            await axios.delete(`https://www.nz-vet-locum.online/clinics/delete/${userClinic._id}`);
+            const urls = [`https://www.nz-vet-locum.online/clinics/delete/${userClinic._id}`,
+            `https://www.nz-vet-locum.online/jobs/delete/clinic/${userClinic._id}`]
+
+            const deleteRequests = urls.map((url) => {
+                return axios.delete(url);
+            });
+
+            await axios.all(deleteRequests);
+
+            // Handle success 
             localStorage.clear(); //clear user data on sign-out 
             setCurrentUserInfoClinic({})
             navigate('/')
             window.location.reload()
+            console.log('Delete requests completed successfully!');
+
         } catch (error) {
-            console.log(error);
+            console.error('Error during delete requests:', error);
         }
     };
 
