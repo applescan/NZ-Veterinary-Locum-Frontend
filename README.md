@@ -79,6 +79,6 @@ How to run on your own system using localhost:
 
 - Website - https://applescan.github.io/Portfolio-Website/
 
-## [License](https://github.com/iharsh234/WebApp/blob/master/LICENSE.md)
+## License
 
 MIT © Felicia Fel
