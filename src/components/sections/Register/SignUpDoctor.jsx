@@ -49,11 +49,10 @@ export default function SignUp() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+    
         setError(null)
         setUploading(true)
-        console.log(uploading)
-
+    
         const toSend = new FormData()
         toSend.append('first_name', details.first_name)
         toSend.append('last_name', details.last_name)
@@ -65,22 +64,24 @@ export default function SignUp() {
         toSend.append('license', details.license)
         toSend.append('availability', details.availability)
         toSend.append('work_requirement', details.work_requirement)
-        toSend.append('imageKey', FileRef.current.files[0])
-        console.log("uploading")
+    
+        // Append the imageKey only if there's an uploaded file
+        if (FileRef.current.files[0]) {
+            toSend.append('imageKey', FileRef.current.files[0])
+        }
+    
         axios.post('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/doctors/add', toSend, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "multipart/form-data"
             }
         }).then(response => {
-            console.log(response.data)
             setCurrentUserInfo(response.data.currentUserInfo)
             navigate("/sign-in")
         })
-            .catch((error) => { setError(error.response.data.msg); setUploading(false) }) //runs both function, setUploading is a second param to .catch
+        .catch((error) => { setError(error.response.data.msg); setUploading(false) })
     };
-
-
+    
 
     const FileRef = React.useRef()
 
