@@ -35,7 +35,7 @@ const SignIn = () => {
 
         const userClinic = new FormData(event.currentTarget);
 
-        axios.post('https://www.nz-vet-locum.online/clinics/login', userClinic, {
+        axios.post('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/login', userClinic, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "multipart/form-data"

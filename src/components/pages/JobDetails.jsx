@@ -17,7 +17,7 @@ export default function JobDetails() {
 
     useEffect(() => {
         axios
-            .get(`https://www.nz-vet-locum.online/jobs/search/id/${id}`)
+            .get(`https://nz-locum-backend-3a82ed85ab97.herokuapp.com/jobs/search/id/${id}`)
             .then(res => {
                 console.log(res.data)
                 setPosts(res.data[0])

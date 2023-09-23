@@ -27,7 +27,7 @@ export default function JobList() {
     const [basicActive, setBasicActive] = useState('all');
     const navigate = useNavigate()
 
-    const handleBasicClick = (value: string) => {
+    const handleBasicClick = (value) => {
         if (value === basicActive) {
             return;
         }
@@ -37,7 +37,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/jobs/all')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/jobs/all')
             .then(res => {
                 console.log(res)
                 setPost(res.data)
@@ -50,7 +50,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/jobs/search/north')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/jobs/search/north')
             .then(res => {
                 //console.log(res)
                 setNorthland(res.data)
@@ -63,7 +63,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/jobs/search/auck')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/jobs/search/auck')
             .then(res => {
                 //console.log(res)
                 setAuckland(res.data)
@@ -76,7 +76,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/jobs/search/well')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/jobs/search/well')
             .then(res => {
                 //console.log(res)
                 setWellington(res.data)
@@ -89,7 +89,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/jobs/search/dun')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/jobs/search/dun')
             .then(res => {
                 //console.log(res)
                 setDunedin(res.data)
@@ -102,7 +102,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/jobs/search/chri')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/jobs/search/chri')
             .then(res => {
                 //console.log(res)
                 setChristchurch(res.data)
@@ -115,7 +115,7 @@ export default function JobList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/jobs/search/queen')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/jobs/search/queen')
             .then(res => {
                 //console.log(res)
                 setQueenstown(res.data)
