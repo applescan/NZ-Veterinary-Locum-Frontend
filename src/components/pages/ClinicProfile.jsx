@@ -61,8 +61,8 @@ export default function DoctorProfile() {
         event.preventDefault();
 
         try {
-            const urls = [`https://www.nz-vet-locum.online/clinics/delete/${userClinic._id}`,
-            `https://www.nz-vet-locum.online/jobs/delete/clinic/${userClinic._id}`]
+            const urls = [`https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/delete/${userClinic._id}`,
+            `https://nz-locum-backend-3a82ed85ab97.herokuapp.com/jobs/delete/clinic/${userClinic._id}`]
 
             const deleteRequests = urls.map((url) => {
                 return axios.delete(url);
@@ -91,7 +91,7 @@ export default function DoctorProfile() {
 
             //getting current user's data based on the id stored in local storage
             const getUserById = async () => {
-                const res = await axios.get(`https://www.nz-vet-locum.online/clinics/search/${userClinic._id}`);
+                const res = await axios.get(`https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/search/${userClinic._id}`);
                 setCurrentUserInfoClinic(res.data.currentUserInfoClinic[0])
                 console.log(res.data.currentUserInfoClinic[0])
             };
@@ -138,7 +138,7 @@ export default function DoctorProfile() {
         console.log("uploading")
 
         try {
-            fetch(`https://www.nz-vet-locum.online/clinics/update/${userClinic._id}`, {
+            fetch(`https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/update/${userClinic._id}`, {
                 method: "POST",
                 body: toSend
             }).then(() => {
@@ -175,7 +175,7 @@ export default function DoctorProfile() {
                         <MDBCard className="mb-4">
                             <MDBCardBody className="text-center">
                                 <MDBCardImage
-                                    src={`https://www.nz-vet-locum.online/images/${currentUserInfoClinic.imageKey}`}
+                                    src={currentUserInfoClinic.imageKey}
                                     alt="avatar"
                                     className="rounded"
                                     style={{ width: '250px', height: '200px', objectFit: 'cover' }}

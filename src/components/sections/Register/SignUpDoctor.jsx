@@ -67,7 +67,7 @@ export default function SignUp() {
         toSend.append('work_requirement', details.work_requirement)
         toSend.append('imageKey', FileRef.current.files[0])
         console.log("uploading")
-        axios.post('https://www.nz-vet-locum.online/doctors/add', toSend, {
+        axios.post('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/doctors/add', toSend, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "multipart/form-data"

@@ -28,7 +28,7 @@ export default function ClinicList() {
     const [error, setError] = useState("")
     const [basicActive, setBasicActive] = useState('all');
 
-    const handleBasicClick = (value: string) => {
+    const handleBasicClick = (value) => {
         if (value === basicActive) {
             return;
         }
@@ -38,7 +38,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/clinics/all')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/all')
             .then(res => {
                 console.log(res)
                 setPost(res.data)
@@ -51,7 +51,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/clinics/search/city/north')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/search/city/north')
             .then(res => {
                 //console.log(res)
                 setNorthland(res.data)
@@ -64,7 +64,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/clinics/search/city/auck')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/search/city/auck')
             .then(res => {
                 //console.log(res)
                 setAuckland(res.data)
@@ -77,7 +77,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/clinics/search/city/well')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/search/city/well')
             .then(res => {
                 //console.log(res)
                 setWellington(res.data)
@@ -90,7 +90,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/clinics/search/city/dun')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/search/city/dun')
             .then(res => {
                 //console.log(res)
                 setDunedin(res.data)
@@ -103,7 +103,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/clinics/search/city/chr')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/search/city/chr')
             .then(res => {
                 //console.log(res)
                 setChristchurch(res.data)
@@ -116,7 +116,7 @@ export default function ClinicList() {
 
     useEffect(() => {
         axios
-            .get('https://www.nz-vet-locum.online/clinics/search/city/queen')
+            .get('https://nz-locum-backend-3a82ed85ab97.herokuapp.com/clinics/search/city/queen')
             .then(res => {
                 //console.log(res)
                 setQueenstown(res.data)
@@ -186,7 +186,7 @@ export default function ClinicList() {
                         {posts.map(post =>
                             <Col>
                                 <Card style={{ width: 'auto' }}>
-                                    <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${post.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                    <Card.Img variant="top" src={post.imageKey} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                     <br></br>
                                     <div id='cards'>
                                         <Card.Title>{post.business_name} </Card.Title>
@@ -221,7 +221,7 @@ export default function ClinicList() {
                             {northland.map(north =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${north.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={north.imageKey} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{north.business_name} </Card.Title>
@@ -258,7 +258,7 @@ export default function ClinicList() {
                             {auckland.map(auck =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${auck.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={auck.imageKey} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{auck.business_name} </Card.Title>
@@ -295,7 +295,7 @@ export default function ClinicList() {
                             {wellington.map(wlg =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${wlg.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={wlg.imageKey} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{wlg.business_name} </Card.Title>
@@ -331,7 +331,7 @@ export default function ClinicList() {
                             {dunedin.map(dune =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${dune.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={dune.imageKey} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{dune.business_name} </Card.Title>
@@ -368,7 +368,7 @@ export default function ClinicList() {
                             {christchurch.map(chch =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${chch.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={chch.imageKey} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{chch.business_name} </Card.Title>
@@ -405,7 +405,7 @@ export default function ClinicList() {
                             {queenstown.map(queens =>
                                 <Col>
                                     <Card style={{ width: 'auto' }}>
-                                        <Card.Img variant="top" src={`https://www.nz-vet-locum.online/images/${queens.imageKey}`} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
+                                        <Card.Img variant="top" src={queens.imageKey} style={{ width: 'auto', height: '230px', objectFit: 'cover' }} />
                                         <br></br>
                                         <div id='cards'>
                                             <Card.Title>{queens.business_name} </Card.Title>
