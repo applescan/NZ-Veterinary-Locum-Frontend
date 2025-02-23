@@ -33,7 +33,7 @@ import Loading from "../elements/Loading";
 
 const theme = createTheme();
 
-export default function DoctorProfile() {
+export default function ClinicProfile() {
   const FileRef = React.useRef();
   const navigate = useNavigate();
 
